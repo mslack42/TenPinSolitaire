@@ -1,31 +1,17 @@
 <script setup>
 import Card from '../Card.vue';
-import { ref } from 'vue'
-import { testPinCards } from '../../test/testPinCards'
+import { usePinsStore } from '../../../stores/pinsStore'
+import { storeToRefs } from 'pinia';
 
-const cards = ref(testPinCards)
+const pinsStore = usePinsStore()
+const { pins } = storeToRefs(pinsStore)
 
 </script>
 
 <template>
     <div class="tenpins">
-        <div class="pinrow">
-            <Card v-bind="cards[0]"></Card>
-            <Card v-bind="cards[1]"></Card>
-            <Card v-bind="cards[2]"></Card>
-            <Card v-bind="cards[3]"></Card>
-        </div>
-        <div class="pinrow">
-            <Card v-bind="cards[4]"></Card>
-            <Card v-bind="cards[5]"></Card>
-            <Card v-bind="cards[6]"></Card>
-        </div>
-        <div class="pinrow">
-            <Card v-bind="cards[7]"></Card>
-            <Card v-bind="cards[8]"></Card>
-        </div>
-        <div class="pinrow">
-            <Card v-bind="cards[9]"></Card>
+        <div class="pinrow" v-for="pinrow in pins">
+            <Card v-for="pin in pinrow" v-bind="pin"></Card>
         </div>
     </div>
 </template>

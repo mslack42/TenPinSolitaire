@@ -12,8 +12,6 @@ const props = defineProps({
     isShrunk: Boolean
 })
 
-console.log(props)
-
 const suitColour = computed(() => props.isPrimarySuit ? 'red' : 'black')
 const classes = computed(() => [
     props.isFaceUp ? 'faceup ' : 'facedown ',

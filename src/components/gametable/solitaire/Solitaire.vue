@@ -1,29 +1,17 @@
 <script setup>
 import Card from '../Card.vue';
-import { ref } from 'vue'
-import { testSolitaireCards } from '../../test/testSolitaireCards'
+import { useSolitaireStore } from '../../../stores/solitaireStore'
+import { storeToRefs } from 'pinia';
 
-const cards = ref(testSolitaireCards)
+const solitaireStore = useSolitaireStore()
+const { solitaire } = storeToRefs(solitaireStore)
 
 </script>
 
 <template>
     <div class="solitaire">
-        <div class="cardcol">
-            <Card v-bind="cards[0]"></Card>
-            <Card v-bind="cards[1]"></Card>
-            <Card v-bind="cards[2]"></Card>
-            <Card v-bind="cards[3]"></Card>
-            <Card v-bind="cards[4]"></Card>
-        </div>
-        <div class="cardcol">
-            <Card v-bind="cards[5]"></Card>
-            <Card v-bind="cards[6]"></Card>
-            <Card v-bind="cards[7]"></Card>
-        </div>
-        <div class="cardcol">
-            <Card v-bind="cards[8]"></Card>
-            <Card v-bind="cards[9]"></Card>
+        <div class="cardcol" v-for="col in solitaire">
+            <Card v-for="card in col" v-bind="card"></Card>
         </div>
     </div>
 </template>
