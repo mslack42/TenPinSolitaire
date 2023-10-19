@@ -8,7 +8,7 @@ const storageKey = 'score'
 
 let scoreState = localStorage.getItem(storageKey);
 if (!scoreState) {
-    scoreState = structureClone(initialScoreState)
+    scoreState = structuredClone(initialScoreState)
 } else {
     scoreState = JSON.parse(scoreState)
 }
@@ -25,15 +25,24 @@ export const useScoreStore = defineStore(storageKey, () => {
     const balls = ref(scoreState.balls)
     const scoreboard = computed(() => generateScoreboardFromBowls(balls.value))
     const totals = computed(() => generateTotalsFromScoreBoard(generateScoreboardFromBowls(balls.value)))
+    const pendingBall = ref(scoreState.pendingBall)
+
 
     function getState() {
         return {
-            balls: balls.value
+            balls: balls.value,
+            pendingBall: pendingBall.value
         }
     }
 
-    function saveNewBowl(bowl) {
-        balls.value.push(bowl)
+    function saveNewPendingBowl(bowlIncrement) {
+        pendingBall.value = pendingBall.value + bowlIncrement
+        persistStore(getState())
+    }
+
+    function commitBowl() {
+        balls.value.push(pendingBall.value)
+        pendingBall.value = 0
         persistStore(getState())
     }
 
@@ -46,7 +55,8 @@ export const useScoreStore = defineStore(storageKey, () => {
         balls,
         scoreboard,
         totals,
-        saveNewBowl,
+        commitBowl,
+        saveNewPendingBowl,
         reset
     }
 })

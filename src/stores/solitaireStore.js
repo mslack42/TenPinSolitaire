@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue';
 import { initialSolitaireState } from '../constants/initialSolitaireState'
 import { updateSolitaireSelectability } from '../logic/solitaire/update-selectability'
+import { getSelectedCardCoordinates } from '../logic/general/get-selected-pin-coordinates';
 
 const storageKey = 'solitaire'
 
@@ -21,7 +22,7 @@ function persistStore(state) {
 
 export const useSolitaireStore = defineStore(storageKey, () => {
     const solitaire = ref(solitaireState.solitaire)
-    // const selectedCard = computed(())
+    const selectedCardCoords = computed(() => getSelectedCardCoordinates(solitaire.value))
 
     function getState() {
         return {
@@ -35,6 +36,7 @@ export const useSolitaireStore = defineStore(storageKey, () => {
 
     return {
         solitaire,
+        selectedCardCoords,
         updateSelectability
     }
 })

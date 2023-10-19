@@ -1,5 +1,6 @@
 
 
 export const initialScoreState = {
-    balls: []
+    balls: [],
+    pendingBall: 0
 }
