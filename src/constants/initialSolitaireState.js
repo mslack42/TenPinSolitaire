@@ -42,7 +42,7 @@ export const initialSolitaireState = {
             isFaceUp: true,
             isSelected: false,
             isPresent: true,
-            isSelectable: false,
+            isSelectable: true,
             isShrunk: false
         }], [
         {
@@ -69,7 +69,7 @@ export const initialSolitaireState = {
             isFaceUp: true,
             isSelected: false,
             isPresent: true,
-            isSelectable: false,
+            isSelectable: true,
             isShrunk: false
         }], [
         {
@@ -87,7 +87,7 @@ export const initialSolitaireState = {
             isFaceUp: true,
             isSelected: false,
             isPresent: true,
-            isSelectable: false,
+            isSelectable: true,
             isShrunk: false
         }]
     ]

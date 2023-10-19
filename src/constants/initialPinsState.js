@@ -8,7 +8,8 @@ export const initialPinsState = {
                 isSelected: false,
                 isPresent: true,
                 isSelectable: true,
-                isShrunk: false
+                isShrunk: false,
+                selectOrder: null
             },
             {
                 value: 2,
@@ -17,7 +18,8 @@ export const initialPinsState = {
                 isSelected: false,
                 isPresent: true,
                 isSelectable: false,
-                isShrunk: false
+                isShrunk: false,
+                selectOrder: null
             },
             {
                 value: 3,
@@ -26,7 +28,8 @@ export const initialPinsState = {
                 isSelected: false,
                 isPresent: true,
                 isSelectable: false,
-                isShrunk: false
+                isShrunk: false,
+                selectOrder: null
             },
             {
                 value: 4,
@@ -34,8 +37,9 @@ export const initialPinsState = {
                 isFaceUp: true,
                 isSelected: false,
                 isPresent: true,
-                isSelectable: false,
-                isShrunk: false
+                isSelectable: true,
+                isShrunk: false,
+                selectOrder: null
             }],
         [
             {
@@ -44,8 +48,9 @@ export const initialPinsState = {
                 isFaceUp: true,
                 isSelected: false,
                 isPresent: true,
-                isSelectable: false,
-                isShrunk: false
+                isSelectable: true,
+                isShrunk: false,
+                selectOrder: null
             },
             {
                 value: 6,
@@ -54,26 +59,29 @@ export const initialPinsState = {
                 isSelected: false,
                 isPresent: true,
                 isSelectable: false,
-                isShrunk: false
+                isShrunk: false,
+                selectOrder: null
             },
             {
                 value: 7,
                 isPrimarySuit: false,
                 isFaceUp: true,
                 isSelected: false,
-                isPresent: false,
-                isSelectable: false,
-                isShrunk: false
+                isPresent: true,
+                isSelectable: true,
+                isShrunk: false,
+                selectOrder: null
             }],
         [
             {
                 value: 8,
                 isPrimarySuit: false,
                 isFaceUp: true,
-                isSelected: true,
+                isSelected: false,
                 isPresent: true,
-                isSelectable: false,
-                isShrunk: false
+                isSelectable: true,
+                isShrunk: false,
+                selectOrder: null
             },
             {
                 value: 9,
@@ -81,8 +89,9 @@ export const initialPinsState = {
                 isFaceUp: true,
                 isSelected: false,
                 isPresent: true,
-                isSelectable: false,
-                isShrunk: false
+                isSelectable: true,
+                isShrunk: false,
+                selectOrder: null
             }],
         [
             {
@@ -91,8 +100,10 @@ export const initialPinsState = {
                 isFaceUp: true,
                 isSelected: false,
                 isPresent: true,
-                isSelectable: false,
-                isShrunk: false
+                isSelectable: true,
+                isShrunk: false,
+                selectOrder: null
             }
-        ]]
+        ]],
+    coordinatesHitThisBall: []
 }

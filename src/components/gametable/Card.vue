@@ -9,7 +9,8 @@ const props = defineProps({
     isSelected: Boolean,
     isPresent: Boolean,
     isSelectable: Boolean,
-    isShrunk: Boolean
+    isShrunk: Boolean,
+    selectOrder: Number
 })
 
 const suitColour = computed(() => props.isPrimarySuit ? 'red' : 'black')
@@ -22,15 +23,21 @@ const classes = computed(() => [
 ].join('').trim())
 
 const emit = defineEmits([
-    "selected"
+    "selected",
+    "deselected"
 ])
+
+function handleClick() {
+    const event = props.isSelected ? 'deselected' : 'selected'
+    emit(event)
+}
 
 </script>
 
 <template>
     <div class="card-wrapper" :class="classes">
         <div class="card-aura">
-            <div v-if="isFaceUp && isPresent" class="card">
+            <div v-if="isFaceUp && isPresent" class="card" v-on="{ click: isSelectable ? handleClick : null }">
                 <div class="card-contents">
                     {{ value }}
                 </div>
