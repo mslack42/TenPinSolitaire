@@ -6,29 +6,9 @@ import { getSelectedCardCoordinates } from '../logic/general/get-selected-pin-co
 
 const storageKey = 'solitaire'
 
-let solitaireState = localStorage.getItem(storageKey);
-if (!solitaireState) {
-    solitaireState = structuredClone(initialSolitaireState)
-} else {
-    solitaireState = JSON.parse(solitaireState)
-}
-
-function persistStore(state) {
-    let newState = {
-        solitaire: state.solitaire
-    }
-    localStorage.setItem(storageKey, JSON.stringify(newState))
-}
-
 export const useSolitaireStore = defineStore(storageKey, () => {
-    const solitaire = ref(solitaireState.solitaire)
+    const solitaire = ref(initialSolitaireState.solitaire)
     const selectedCardCoords = computed(() => getSelectedCardCoordinates(solitaire.value))
-
-    function getState() {
-        return {
-            solitaire: solitaire.value
-        }
-    }
 
     function updateSelectability() {
         solitaire.value = updateSolitaireSelectability(solitaire.value)
