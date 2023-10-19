@@ -13,7 +13,6 @@ if (!scoreState) {
     scoreState = JSON.parse(scoreState)
 }
 
-
 function persistStore(state) {
     let newState = {
         balls: state.balls

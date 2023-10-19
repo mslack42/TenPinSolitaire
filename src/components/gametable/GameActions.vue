@@ -33,7 +33,6 @@ function makeHit() {
 }
 
 function pass() {
-    console.log(totals.value[totals.value.length - 1])
     scoreStore.commitBowl()
     // Update the pins and the solitaire if we need to
 }
