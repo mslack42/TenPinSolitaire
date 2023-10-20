@@ -5,13 +5,13 @@ export function getCurrentFrame(scoreboard) {
                 // Current frame is all filled in
                 return out + 1
             }
-            if (r[0] !== null) {
-                // Current frame, ball 1
-                return out
-            }
             if (r[0] == 10) {
                 //  Current frame a strike
                 return out + 1
+            }
+            if (r[0] !== null) {
+                // Current frame, ball 1
+                return out
             }
             // Current frame, ball 2
             return out

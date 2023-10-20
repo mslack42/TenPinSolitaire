@@ -58,8 +58,13 @@ function makeHit() {
 
 function pass() {
     const activeFrame = currentFrame.value
+    console.log(activeFrame)
+    console.log(currentBall.value)
     scoreStore.commitBowl()
     const nextFrame = currentFrame.value
+    console.log(activeFrame)
+    console.log(nextFrame)
+    console.log(currentBall.value)
     // Update the pins and the solitaire if we need to
     if (activeFrame === nextFrame) {
         coordinatesHitThisBall.value = []
