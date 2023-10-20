@@ -23,6 +23,8 @@ export const useCentralStore = defineStore('central', () => {
             balls.value,
             0
         )
+        pinsStore.updateSelectability()
+        solitaireStore.updateSelectability()
     }
 
     function applyAllState(

@@ -7,3 +7,5 @@ Get initial ball cycle working
 Get intial frame working
 Get all frames working
 Get end of game working
+
+Too much state is being cached - split state into data state, and UI state. Only cache the data

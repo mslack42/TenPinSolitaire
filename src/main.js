@@ -7,3 +7,4 @@ const app = createApp(App)
 app.use(piniaObj)
 
 app.mount('#app')
+

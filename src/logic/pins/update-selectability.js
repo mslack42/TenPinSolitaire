@@ -31,16 +31,20 @@ export function updatePinsSelectability(pins, coordinatesHitSoFar) {
     ]
 
     let selectableCoords = []
+    const missingPinCoords = getMissingPinCoords(pins)
     if (selectedPinCoords.length == 0) {
-        if (coordinatesHitSoFar.length == 0) {
+        if (coordinatesHitSoFar.length == 0 && missingPinCoords.length == 0) {
             // Just the outermost pins
             selectableCoords = initialSelectableCoords
+        } else if (coordinatesHitSoFar.length == 0) {
+            const gapCoords = getPinCoordsNeighbourhood(missingPinCoords)
+            const externalCoords = initialSelectableCoords
+            selectableCoords = [...new Set(gapCoords.concat(externalCoords).map(toString))].map(fromString)
         } else {
             // Need to
             // - Find neighbourhood of pins hit already
             const nbhdCoords = getPinCoordsNeighbourhood(coordinatesHitSoFar)
             // - Filter out any missing pins
-            const missingPinCoords = getMissingPinCoords(pins)
             selectableCoords = nbhdCoords.filter(c => !missingPinCoords.includes(c))
         }
     } else {
@@ -48,7 +52,6 @@ export function updatePinsSelectability(pins, coordinatesHitSoFar) {
         //  - Find pins adjacent to already selected pins
         const nbhdCoords = getPinCoordsNeighbourhood(selectedPinCoords)
         // - Filter out any missing pins
-        const missingPinCoords = getMissingPinCoords(pins)
         selectableCoords = nbhdCoords.map(toString).filter(c => !missingPinCoords.map(toString).includes(c)).map(fromString)
     }
 

@@ -2,15 +2,17 @@
 import { usePinsStore } from '../../stores/pinsStore'
 import { useSolitaireStore } from '../../stores/solitaireStore'
 import { useScoreStore } from '../../stores/scoreStore';
+import { useCentralStore } from '../../stores/centralStore'
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue'
 
 const pinsStore = usePinsStore()
-const { pins, selectedPinCoords } = storeToRefs(pinsStore)
+const { pins, selectedPinCoords, coordinatesHitThisBall, remainingPinCoords } = storeToRefs(pinsStore)
 const solitaireStore = useSolitaireStore()
 const { solitaire, selectedCardCoords } = storeToRefs(solitaireStore)
 const scoreStore = useScoreStore()
-const { balls, scoreboard, totals } = storeToRefs(scoreStore)
+const { currentFrame, currentBall, totals } = storeToRefs(scoreStore)
+const centralStore = useCentralStore()
 
 const isHitValid = computed(() => {
     if (totals.value[totals.value.length - 1] !== null) {
@@ -29,12 +31,62 @@ const isHitValid = computed(() => {
 function makeHit() {
     scoreStore.saveNewPendingBowl(selectedPinCoords.value.length)
     // Remove selected cards from pins (plus upkeep)
+    coordinatesHitThisBall.value = coordinatesHitThisBall.value.concat(selectedPinCoords.value)
+    selectedPinCoords.value.forEach(c => {
+        const [x, y] = c
+        const pin = pins.value[x][y]
+        pin.isPresent = false
+        pin.isSelectable = false
+        pin.isSelected = false
+    })
+
     // Remove selected card from solitaire (plus upkeep)
+    const [cx, cy] = selectedCardCoords.value[0]
+    const card = solitaire.value[cx][cy]
+    card.isPresent = false
+    card.isSelected = false
+    card.isShrunk = true
+    if (cy > 0) {
+        const nextCard = solitaire.value[cx][cy - 1]
+        nextCard.isFaceUp = true
+        nextCard.isShrunk = false
+    }
+
+    pinsStore.updateSelectability()
+    solitaireStore.updateSelectability()
 }
 
 function pass() {
+    const activeFrame = currentFrame.value
     scoreStore.commitBowl()
+    const nextFrame = currentFrame.value
     // Update the pins and the solitaire if we need to
+    if (activeFrame === nextFrame) {
+        coordinatesHitThisBall.value = []
+        solitaire.value.forEach(col => {
+            const lastTwoCards = col.reduce((pair, card) => {
+                if (card.isPresent) {
+                    return [pair[1], card]
+                } else {
+                    return pair
+                }
+            }, [null, null]);
+            if (lastTwoCards[1]) {
+                lastTwoCards[1].isPresent = false
+                lastTwoCards[1].isSelected = false
+                lastTwoCards[1].isShrunk = true
+            }
+            if (lastTwoCards[0]) {
+                lastTwoCards[0].isFaceUp = true
+                lastTwoCards[0].isShrunk = false
+            }
+        })
+    } else {
+        centralStore.dealFreshCards()
+    }
+
+    pinsStore.updateSelectability()
+    solitaireStore.updateSelectability()
 }
 </script>
 
