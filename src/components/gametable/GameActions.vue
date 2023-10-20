@@ -97,7 +97,7 @@ function pass() {
 
 <template>
     <button :disabled="!isHitValid" @click="makeHit">Confirm</button>
-    <button @click="pass">Pass</button>
+    <button :disabled="selectedPinCoords.length || selectedCardCoords.length" @click="pass">Pass</button>
 </template>
 
 <style scoped></style>
