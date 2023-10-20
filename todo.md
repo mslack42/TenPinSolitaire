@@ -23,3 +23,5 @@ Seed a whole game from one seed
 Implement a 'daily' mode, with some sort of tracker recent dailies (line graph?)
 
 Some sort of check 'Are you sure you want to pass, there are still pins you could knock down?'
+
+Visual indication of current pin sum?
