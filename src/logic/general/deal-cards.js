@@ -38,12 +38,13 @@ function dealSolitaire(solitaireCards) {
 }
 
 export function dealCards() {
-    const allCards = Array(10).fill(null)
+    const allCards = Array(10)
+        .fill(null)
         .map((_, i) => [createCard(i + 1, true), createCard(i + 1, false)])
         .reduce((a, b) => a.concat(b), [])
 
     const shuffled = allCards
-        .map(value => ({ value, sort: Math.random() }))
+        .map((value) => ({ value, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .map(({ value }) => value)
 

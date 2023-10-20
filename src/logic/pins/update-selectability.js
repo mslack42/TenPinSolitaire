@@ -10,8 +10,8 @@ export function updatePinsSelectability(pins, coordinatesHitSoFar) {
         return coordStr.split(',').map(Number)
     }
 
-    const selectedPinCoords = getSelectedCardCoordinates(pins);
-    selectedPinCoords.forEach(c => {
+    const selectedPinCoords = getSelectedCardCoordinates(pins)
+    selectedPinCoords.forEach((c) => {
         // Numbering the selected pins, to prevent cheese later
         const [x, y] = c
         const pin = pins[x][y]
@@ -39,32 +39,39 @@ export function updatePinsSelectability(pins, coordinatesHitSoFar) {
         } else if (coordinatesHitSoFar.length == 0) {
             const gapCoords = getPinCoordsNeighbourhood(missingPinCoords)
             const externalCoords = initialSelectableCoords
-            selectableCoords = [...new Set(gapCoords.concat(externalCoords).map(toString))].map(fromString)
+            selectableCoords = [
+                ...new Set(gapCoords.concat(externalCoords).map(toString))
+            ].map(fromString)
         } else {
             // Need to
             // - Find neighbourhood of pins hit already
             const nbhdCoords = getPinCoordsNeighbourhood(coordinatesHitSoFar)
             // - Filter out any missing pins
-            selectableCoords = nbhdCoords.filter(c => !missingPinCoords.includes(c))
+            selectableCoords = nbhdCoords.filter(
+                (c) => !missingPinCoords.includes(c)
+            )
         }
     } else {
         // Need to
         //  - Find pins adjacent to already selected pins
         const nbhdCoords = getPinCoordsNeighbourhood(selectedPinCoords)
         // - Filter out any missing pins
-        selectableCoords = nbhdCoords.map(toString).filter(c => !missingPinCoords.map(toString).includes(c)).map(fromString)
+        selectableCoords = nbhdCoords
+            .map(toString)
+            .filter((c) => !missingPinCoords.map(toString).includes(c))
+            .map(fromString)
     }
 
-    pins.forEach(row => {
-        row.forEach(pin => pin.isSelectable = false)
+    pins.forEach((row) => {
+        row.forEach((pin) => (pin.isSelectable = false))
     })
     if (selectedPinCoords.length < 3) {
-        selectableCoords.forEach(c => {
+        selectableCoords.forEach((c) => {
             const [x, y] = c
             pins[x][y].isSelectable = true
         })
     }
-    selectedPinCoords.forEach(c => {
+    selectedPinCoords.forEach((c) => {
         const [x, y] = c
         const pin = pins[x][y]
         if (pin.selectOrder === selectedPinCoords.length) {

@@ -40,7 +40,8 @@ export const initialPinsState = {
                 isSelectable: true,
                 isShrunk: false,
                 selectOrder: null
-            }],
+            }
+        ],
         [
             {
                 value: 5,
@@ -71,7 +72,8 @@ export const initialPinsState = {
                 isSelectable: true,
                 isShrunk: false,
                 selectOrder: null
-            }],
+            }
+        ],
         [
             {
                 value: 8,
@@ -92,7 +94,8 @@ export const initialPinsState = {
                 isSelectable: true,
                 isShrunk: false,
                 selectOrder: null
-            }],
+            }
+        ],
         [
             {
                 value: 10,
@@ -104,6 +107,7 @@ export const initialPinsState = {
                 isShrunk: false,
                 selectOrder: null
             }
-        ]],
+        ]
+    ],
     coordinatesHitThisBall: []
 }

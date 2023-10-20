@@ -14,8 +14,8 @@ export function getPinCoordNeighbourhood(coord) {
     ]
 
     return candidateNeighbourhood
-        .filter(pair => pair[0] >= 0 && pair[1] >= 0)
-        .filter(pair => pair[0] + pair[1] <= 3)
+        .filter((pair) => pair[0] >= 0 && pair[1] >= 0)
+        .filter((pair) => pair[0] + pair[1] <= 3)
 }
 
 export function getPinCoordsNeighbourhood(coords) {
@@ -26,13 +26,14 @@ export function getPinCoordsNeighbourhood(coords) {
         return coordStr.split(',').map(Number)
     }
 
-    let candidates = coords.map(c => getPinCoordNeighbourhood(c))
-        .map(nbhd => nbhd.map(toString))
+    let candidates = coords
+        .map((c) => getPinCoordNeighbourhood(c))
+        .map((nbhd) => nbhd.map(toString))
         .reduce((a, b) => a.concat(b), [])
     candidates = [...new Set(candidates)]
 
     const coordsStrs = coords.map(toString)
-    candidates = candidates.filter(c => !coordsStrs.includes(c))
+    candidates = candidates.filter((c) => !coordsStrs.includes(c))
 
     return candidates.map(fromString)
 }

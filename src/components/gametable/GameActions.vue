@@ -1,13 +1,14 @@
 <script setup>
 import { usePinsStore } from '../../stores/pinsStore'
 import { useSolitaireStore } from '../../stores/solitaireStore'
-import { useScoreStore } from '../../stores/scoreStore';
+import { useScoreStore } from '../../stores/scoreStore'
 import { useCentralStore } from '../../stores/centralStore'
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
 const pinsStore = usePinsStore()
-const { pins, selectedPinCoords, coordinatesHitThisBall, remainingPinCoords } = storeToRefs(pinsStore)
+const { pins, selectedPinCoords, coordinatesHitThisBall } =
+    storeToRefs(pinsStore)
 const solitaireStore = useSolitaireStore()
 const { solitaire, selectedCardCoords } = storeToRefs(solitaireStore)
 const scoreStore = useScoreStore()
@@ -19,11 +20,18 @@ const isHitValid = computed(() => {
         // The game is over
         return false
     }
-    if (selectedPinCoords.value.length === 0 || selectedCardCoords.value.length === 0) {
+    if (
+        selectedPinCoords.value.length === 0 ||
+        selectedCardCoords.value.length === 0
+    ) {
         return false
     }
-    const pinSum = selectedPinCoords.value.map(c => pins.value[c[0]][c[1]].value).reduce((a, b) => a + b)
-    const solitaireSum = selectedCardCoords.value.map(c => solitaire.value[c[0]][c[1]].value).reduce((a, b) => a + b)
+    const pinSum = selectedPinCoords.value
+        .map((c) => pins.value[c[0]][c[1]].value)
+        .reduce((a, b) => a + b)
+    const solitaireSum = selectedCardCoords.value
+        .map((c) => solitaire.value[c[0]][c[1]].value)
+        .reduce((a, b) => a + b)
 
     return (pinSum % 10) - (solitaireSum % 10) === 0
 })
@@ -31,8 +39,10 @@ const isHitValid = computed(() => {
 function makeHit() {
     scoreStore.saveNewPendingBowl(selectedPinCoords.value.length)
     // Remove selected cards from pins (plus upkeep)
-    coordinatesHitThisBall.value = coordinatesHitThisBall.value.concat(selectedPinCoords.value)
-    selectedPinCoords.value.forEach(c => {
+    coordinatesHitThisBall.value = coordinatesHitThisBall.value.concat(
+        selectedPinCoords.value
+    )
+    selectedPinCoords.value.forEach((c) => {
         const [x, y] = c
         const pin = pins.value[x][y]
         pin.isPresent = false
@@ -68,14 +78,17 @@ function pass() {
     // Update the pins and the solitaire if we need to
     if (activeFrame === nextFrame) {
         coordinatesHitThisBall.value = []
-        solitaire.value.forEach(col => {
-            const lastTwoCards = col.reduce((pair, card) => {
-                if (card.isPresent) {
-                    return [pair[1], card]
-                } else {
-                    return pair
-                }
-            }, [null, null]);
+        solitaire.value.forEach((col) => {
+            const lastTwoCards = col.reduce(
+                (pair, card) => {
+                    if (card.isPresent) {
+                        return [pair[1], card]
+                    } else {
+                        return pair
+                    }
+                },
+                [null, null]
+            )
             if (lastTwoCards[1]) {
                 lastTwoCards[1].isPresent = false
                 lastTwoCards[1].isSelected = false
@@ -97,7 +110,12 @@ function pass() {
 
 <template>
     <button :disabled="!isHitValid" @click="makeHit">Confirm</button>
-    <button :disabled="selectedPinCoords.length || selectedCardCoords.length" @click="pass">Pass</button>
+    <button
+        :disabled="selectedPinCoords.length || selectedCardCoords.length"
+        @click="pass"
+    >
+        Pass
+    </button>
 </template>
 
 <style scoped></style>

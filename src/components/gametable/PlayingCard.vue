@@ -1,5 +1,4 @@
 <script setup>
-
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -13,31 +12,35 @@ const props = defineProps({
     selectOrder: Number
 })
 
-const suitColour = computed(() => props.isPrimarySuit ? 'red' : 'black')
-const classes = computed(() => [
-    props.isFaceUp ? 'faceup ' : 'facedown ',
-    props.isSelected ? 'selected ' : '',
-    props.isPresent ? '' : 'notpresent ',
-    props.isSelectable ? 'selectable ' : '',
-    props.isShrunk ? 'shrunk ' : ''
-].join('').trim())
+const suitColour = computed(() => (props.isPrimarySuit ? 'red' : 'black'))
+const classes = computed(() =>
+    [
+        props.isFaceUp ? 'faceup ' : 'facedown ',
+        props.isSelected ? 'selected ' : '',
+        props.isPresent ? '' : 'notpresent ',
+        props.isSelectable ? 'selectable ' : '',
+        props.isShrunk ? 'shrunk ' : ''
+    ]
+        .join('')
+        .trim()
+)
 
-const emit = defineEmits([
-    "selected",
-    "deselected"
-])
+const emit = defineEmits(['selected', 'deselected'])
 
 function handleClick() {
     const event = props.isSelected ? 'deselected' : 'selected'
     emit(event)
 }
-
 </script>
 
 <template>
     <div class="card-wrapper" :class="classes">
         <div class="card-aura">
-            <div v-if="isFaceUp && isPresent" class="card" v-on="{ click: isSelectable ? handleClick : null }">
+            <div
+                v-if="isFaceUp && isPresent"
+                class="card"
+                v-on="{ click: isSelectable ? handleClick : null }"
+            >
                 <div class="card-contents">
                     {{ value }}
                 </div>

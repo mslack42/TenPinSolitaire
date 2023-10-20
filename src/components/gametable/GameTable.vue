@@ -1,9 +1,7 @@
 <script setup>
-import Solitaire from './solitaire/Solitaire.vue';
-import Pins from './pins/Pins.vue';
-import GameActions from './GameActions.vue';
-
-
+import Solitaire from './solitaire/SolitaireCards.vue'
+import Pins from './pins/PinsCards.vue'
+import GameActions from './GameActions.vue'
 </script>
 
 <template>

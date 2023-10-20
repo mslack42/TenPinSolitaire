@@ -25,7 +25,7 @@ export function getCurrentFrame(scoreboard) {
                 // Current frame, ball 2
                 return out
             }
-            if (((r[0] + r[1]) % 10 === 0) && r[3] === null) {
+            if ((r[0] + r[1]) % 10 === 0 && r[3] === null) {
                 // Current frame, ball 3
                 return out
             }
@@ -44,7 +44,10 @@ export function getCurrentFrameBall(scoreboard) {
     if (currentFrame[0] !== 10 && currentFrame[1] === null) {
         return 1
     }
-    if (((currentFrame[0] + currentFrame[1]) % 10 === 0) && currentFrame[2] === null) {
+    if (
+        (currentFrame[0] + currentFrame[1]) % 10 === 0 &&
+        currentFrame[2] === null
+    ) {
         return 2
     }
     return null

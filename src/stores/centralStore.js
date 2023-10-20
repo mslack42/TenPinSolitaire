@@ -1,10 +1,10 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { usePinsStore } from '../stores/pinsStore'
 import { useSolitaireStore } from '../stores/solitaireStore'
-import { useScoreStore } from './scoreStore';
-import { dealCards } from '../logic/general/deal-cards';
+import { useScoreStore } from './scoreStore'
+import { dealCards } from '../logic/general/deal-cards'
 import { watch } from 'vue'
-import { piniaObj } from './piniaInstance';
+import { piniaObj } from './piniaInstance'
 
 export const useCentralStore = defineStore('central', () => {
     const pinsStore = usePinsStore()
@@ -16,13 +16,7 @@ export const useCentralStore = defineStore('central', () => {
 
     function dealFreshCards() {
         const newDeal = dealCards()
-        applyAllState(
-            newDeal.pins,
-            [],
-            newDeal.solitaire,
-            balls.value,
-            0
-        )
+        applyAllState(newDeal.pins, [], newDeal.solitaire, balls.value, 0)
         pinsStore.updateSelectability()
         solitaireStore.updateSelectability()
     }
@@ -59,7 +53,7 @@ export const useCentralStore = defineStore('central', () => {
         piniaObj.state,
         (state) => {
             // persist the whole state to the local storage whenever it changes
-            localStorage.setItem('tenpinState', JSON.stringify(state));
+            localStorage.setItem('tenpinState', JSON.stringify(state))
         },
         { deep: true }
     )

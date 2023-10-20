@@ -9,7 +9,6 @@ function restart() {
     scoreStore.reset()
     centralStore.dealFreshCards()
 }
-
 </script>
 
 <template>
