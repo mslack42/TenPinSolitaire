@@ -58,15 +58,10 @@ function makeHit() {
 
 function pass() {
     const activeFrame = currentFrame.value
-    console.log(activeFrame)
-    console.log(currentBall.value)
     scoreStore.commitBowl()
     const nextFrame = currentFrame.value
-    console.log(activeFrame)
-    console.log(nextFrame)
-    console.log(currentBall.value)
     // Update the pins and the solitaire if we need to
-    if (activeFrame === nextFrame) {
+    if ((activeFrame === nextFrame && activeFrame < 9) || (activeFrame === nextFrame && activeFrame === 9 && remainingPinCoords.length > 0)) {
         coordinatesHitThisBall.value = []
         solitaire.value.forEach(col => {
             const lastTwoCards = col.reduce((pair, card) => {
@@ -86,7 +81,7 @@ function pass() {
                 lastTwoCards[0].isShrunk = false
             }
         })
-    } else {
+    } else if (activeFrame < 9 || (activeFrame === nextFrame && activeFrame === 9 && remainingPinCoords.value === 0)){
         centralStore.dealFreshCards()
     }
 
