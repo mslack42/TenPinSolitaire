@@ -16,8 +16,8 @@ export function generateScoreboardFromBowls(bowls) {
             }
         }
         if (latestRoundIndex === 9 &&
-            (latestRound.length == 2 && latestRound[0] + latestRound[1] >= 10
-                || latestRound.length == 1)) {
+            ((latestRound.length == 2 && latestRound[0] + latestRound[1] >= 10)
+                || (latestRound.length == 1 && latestRound[0] >= 10))) {
             newScoreboard[latestRoundIndex].push(bowl)
         }
         return newScoreboard
