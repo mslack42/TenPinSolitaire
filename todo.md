@@ -2,6 +2,8 @@ Typescript
 
 Tech debt
 
+BUGFIX NEEDED - strikes/spares not working in last frame correctly - got 8: X, 9: X, 10: X,/
+
 Get end of game working
 
 Too much state is being cached - split state into data state, and UI state. Only cache the data
