@@ -1,14 +1,17 @@
-<script setup>
-import RestartButton from './components/RestartButton.vue';
-import Scoreboard from './components/scoreboard/Scoreboard.vue';
-import GameTable from './components/gametable/GameTable.vue';
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import WelcomeMenu from './client/components/menu/WelcomeMenu.vue'
+import GameView from './client/components/game/GameView.vue'
+import { useClientStore } from './client/stores/clientStore'
+import { AppModes } from './client/AppModes'
 
+const clientStore = useClientStore()
+const { appMode } = storeToRefs(clientStore)
 </script>
 
 <template>
-  <Scoreboard></Scoreboard>
-  <RestartButton></RestartButton>
-  <GameTable></GameTable>
+    <WelcomeMenu v-if="appMode === AppModes.Welcome"></WelcomeMenu>
+    <GameView v-if="appMode === AppModes.Game"></GameView>
 </template>
 
-<style scoped></style>
+<style></style>
