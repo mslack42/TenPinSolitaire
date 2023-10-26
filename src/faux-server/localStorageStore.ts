@@ -15,10 +15,16 @@ export const useLocalStorageStore = defineStore('localStorageMgmt', () => {
         const tenpinStateStr = localStorage.getItem('tenpinState')
         if (tenpinStateStr) {
             console.log('Loading existing game...')
-            const tenpinState = JSON.parse(tenpinStateStr)
-            cardStore.load(tenpinState.cards)
-            coordStore.load(tenpinState.coord)
-            scoreStore.load(tenpinState.score)
+            try {
+                const tenpinState = JSON.parse(tenpinStateStr)
+                cardStore.load(tenpinState.cards)
+                coordStore.load(tenpinState.coord)
+                scoreStore.load(tenpinState.score)
+            } catch (err) {
+                console.log('Failed to load game. Redirecting...')
+                const $router = useRouter()
+                $router.push('/')
+            }
         } else {
             const $router = useRouter()
             $router.push('/')
