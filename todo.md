@@ -1,12 +1,4 @@
-router
-
-Display select order on cards to make UI more usable
-
-Button for clearing selections
-
 Pretty
-
-Too much state is being cached - split state into data state, and UI state. Only cache the data
 
 Get end of game working
 

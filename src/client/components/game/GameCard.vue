@@ -6,7 +6,7 @@ import { Suit } from '../../../data/Suit'
 const props = defineProps<UICard>()
 
 const suitColour = computed(() => (props?.suit === Suit.Hearts ? 'red' : 'black'))
-const suitSymbol = computed(() => (props?.suit === Suit.Hearts ? '♥' : '♠'))
+const suitClass = computed(() => (props?.suit === Suit.Hearts ? 'heart' : 'spade'))
 const isSelected = computed(() => props?.selectOrder !== undefined && props?.selectOrder !== null)
 const classes = computed(() =>
     [
@@ -37,11 +37,16 @@ function handleClick() {
                 v-on="{ click: isSelectable ? handleClick : null }"
             >
                 <div class="card-contents">
-                    <div class="suit-upper">{{ suitSymbol }}</div>
+                    <div class="suit upper" :class="suitClass"></div>
                     <div class="card-value">
                         {{ value }}
                     </div>
-                    <div class="suit-lower">{{ suitSymbol }}</div>
+                    <div class="suit lower" :class="suitClass"></div>
+                </div>
+            </div>
+            <div v-if="!isFaceUp && !isRemoved">
+                <div class="card-reverse">
+                    <div class="card-logo"></div>
                 </div>
             </div>
             <div class="card-select-order" v-if="isSelected && shouldDisplaySelectOrder">
@@ -81,24 +86,35 @@ function handleClick() {
     color: magenta;
 }
 
-.suit-upper {
-    position: absolute;
-    top: -5px;
-    left: 0px;
-    font-size: 0.8em;
+.suit.heart {
+    background-image: url('../../../assets/heart.svg');
 }
 
-.suit-lower {
+.suit.spade {
+    background-image: url('../../../assets/spade.svg');
+}
+
+.suit {
     position: absolute;
-    bottom: -5px;
-    right: 0px;
     font-size: 0.8em;
+    height: 15px;
+    width: 15px;
+}
+
+.suit.upper {
+    top: 0px;
+    left: 0px;
+}
+
+.suit.lower {
+    bottom: 0px;
+    right: 0px;
 }
 
 .card-wrapper.buried {
     overflow-y: visible;
     margin: 1px 10px;
-    margin-bottom: -40px;
+    margin-bottom: -50px;
 }
 
 .card-wrapper.facedown {
@@ -107,6 +123,21 @@ function handleClick() {
 
 .card-wrapper.faceup {
     background-color: white;
+}
+
+.card-reverse {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.card-logo {
+    height: 40px;
+    width: 40px;
+    background-image: url('../../../assets/bowling.svg');
+    text-align: center;
+    vertical-align: middle;
 }
 
 .card-aura {
