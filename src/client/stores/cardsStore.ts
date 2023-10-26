@@ -62,7 +62,6 @@ export const useCardsStore = defineStore('clientCards', () => {
     }
 
     function clearSelection() {
-        console.log(solitaire.value)
         pins.value.forEach((pinrow) => {
             pinrow.forEach((pin) => {
                 pin.selectOrder = undefined
@@ -73,7 +72,6 @@ export const useCardsStore = defineStore('clientCards', () => {
                 card.selectOrder = undefined
             })
         })
-        console.log(solitaire.value)
 
         updateSelectability(pins.value, solitaire.value, pinCoordsHitThisBall.value)
     }

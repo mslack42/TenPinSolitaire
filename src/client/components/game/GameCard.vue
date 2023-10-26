@@ -6,6 +6,7 @@ import { Suit } from '../../../data/Suit'
 const props = defineProps<UICard>()
 
 const suitColour = computed(() => (props?.suit === Suit.Hearts ? 'red' : 'black'))
+const suitSymbol = computed(() => (props?.suit === Suit.Hearts ? '♥' : '♠'))
 const isSelected = computed(() => props?.selectOrder !== undefined && props?.selectOrder !== null)
 const classes = computed(() =>
     [
@@ -13,7 +14,7 @@ const classes = computed(() =>
         isSelected.value ? 'selected ' : '',
         props?.isSelectable ? 'selectable ' : '',
         props.isRemoved ? 'removed ' : '',
-        props?.isBuried ? 'shrunk ' : ''
+        props?.isBuried ? 'buried ' : ''
     ]
         .join('')
         .trim()
@@ -36,7 +37,11 @@ function handleClick() {
                 v-on="{ click: isSelectable ? handleClick : null }"
             >
                 <div class="card-contents">
-                    {{ value }}
+                    <div class="suit-upper">{{ suitSymbol }}</div>
+                    <div class="card-value">
+                        {{ value }}
+                    </div>
+                    <div class="suit-lower">{{ suitSymbol }}</div>
                 </div>
             </div>
             <div class="card-select-order" v-if="isSelected && shouldDisplaySelectOrder">
@@ -72,13 +77,28 @@ function handleClick() {
 .card-select-order {
     position: absolute;
     bottom: 1px;
-    right: 1px;
+    left: 1px;
     color: magenta;
 }
 
-.card-wrapper.shrunk {
-    height: 20px;
+.suit-upper {
+    position: absolute;
+    top: -5px;
+    left: 0px;
+    font-size: 0.8em;
+}
+
+.suit-lower {
+    position: absolute;
+    bottom: -5px;
+    right: 0px;
+    font-size: 0.8em;
+}
+
+.card-wrapper.buried {
+    overflow-y: visible;
     margin: 1px 10px;
+    margin-bottom: -40px;
 }
 
 .card-wrapper.facedown {
@@ -104,6 +124,7 @@ function handleClick() {
 
 .card-contents {
     font-size: 25px;
+    font-family: sans-serif;
     color: v-bind(suitColour);
     width: 100%;
     text-align: center;

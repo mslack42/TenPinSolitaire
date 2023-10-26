@@ -36,8 +36,10 @@ const { currentSeed } = storeToRefs(cardStore)
     </template>
     <ScoreBoard v-bind="scoreboardData"></ScoreBoard>
     <template v-if="isGameOngoing">
-        <PinsView></PinsView>
-        <SolitaireView></SolitaireView>
+        <div class="baize">
+            <PinsView></PinsView>
+            <SolitaireView></SolitaireView>
+        </div>
         <GameActions></GameActions>
     </template>
     <template v-else>
@@ -45,4 +47,9 @@ const { currentSeed } = storeToRefs(cardStore)
     >
 </template>
 
-<style></style>
+<style>
+.baize {
+    background-color: rgb(0, 165, 0);
+    height: 500px;
+}
+</style>
