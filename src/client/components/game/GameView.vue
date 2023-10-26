@@ -19,7 +19,7 @@ onBeforeRouteUpdate((to) => {
 })
 
 const scoreStore = useScoreStore()
-const { scoreboard , isGameOngoing} = storeToRefs(scoreStore)
+const { scoreboard, isGameOngoing } = storeToRefs(scoreStore)
 const scoreboardData = computed(() => {
     return {
         scoreboard: scoreboard.value
@@ -30,7 +30,7 @@ const { currentSeed } = storeToRefs(cardStore)
 </script>
 
 <template>
-    <RouterLink to="/">Back to menu...<br/></RouterLink>
+    <RouterLink to="/">Back to menu...<br /></RouterLink>
     <template v-if="currentSeed">
         <div>Current Seed: {{ currentSeed }}</div>
     </template>

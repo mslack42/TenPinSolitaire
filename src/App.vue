@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { useLocalStorageStore } from './faux-server/localStorageStore';
+import { useLocalStorageStore } from './faux-server/localStorageStore'
 
 useLocalStorageStore().loadState()
-
 </script>
 
 <template>

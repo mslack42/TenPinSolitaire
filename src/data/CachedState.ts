@@ -1,15 +1,15 @@
-import type { CardColumn, CardCoord, PinRow } from "./CardCollection"
-import type { FrameScore } from "./FrameScore"
+import type { CardColumn, CardCoord, PinRow } from './CardCollection'
+import type { FrameScore } from './FrameScore'
 
 export interface CardState {
-    _pins: PinRow[],
-    _solitaire: CardColumn[],
-    _pinCoordsHitThisBall: CardCoord[],
+    _pins: PinRow[]
+    _solitaire: CardColumn[]
+    _pinCoordsHitThisBall: CardCoord[]
     _seed: string | null
 }
 
 export interface CoordState {
-    _currentFrame: number,
+    _currentFrame: number
     _currentBall: number
 }
 
@@ -18,7 +18,7 @@ export interface ScoreState {
 }
 
 export interface CachedState {
-    cards: CardState,
-    coord: CoordState,
+    cards: CardState
+    coord: CoordState
     score: ScoreState
 }

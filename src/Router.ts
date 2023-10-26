@@ -12,7 +12,7 @@ const routes = [
     {
         name: 'game',
         path: '/game',
-        component: GameView,
+        component: GameView
     },
     {
         name: 'seededGame',
@@ -20,7 +20,7 @@ const routes = [
         component: GameView,
         beforeEnter: (to: RouteLocationNormalized) => {
             initialiseGame(to.params['seed'] as string)
-            return { path: '/game'}
+            return { path: '/game' }
         }
     },
     {
@@ -29,13 +29,13 @@ const routes = [
         component: GameView,
         beforeEnter: () => {
             initialiseGame()
-            return { path: '/game'}
+            return { path: '/game' }
         }
     },
     {
         name: 'continueGame',
         path: '/game/continue',
-        component: GameView,
+        component: GameView
     }
 ]
 

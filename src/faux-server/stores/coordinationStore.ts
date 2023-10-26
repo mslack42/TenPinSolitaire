@@ -44,8 +44,8 @@ export const useCoordinationStore = defineStore('serverCoordination', () => {
     }
 
     function load(coordState: CoordState) {
-        _currentFrame.value = coordState._currentFrame,
-        _currentBall.value = coordState._currentBall
+        ;(_currentFrame.value = coordState._currentFrame),
+            (_currentBall.value = coordState._currentBall)
     }
 
     function exportForCache() {
