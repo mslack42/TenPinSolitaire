@@ -6,7 +6,6 @@ export const useScoreStore = defineStore('clientScore', () => {
     const scoreboard = ref<FrameScore[]>([])
 
     function refreshScoreboard(newScoreboard: FrameScore[]) {
-        console.log('refreshing scoreboard')
         scoreboard.value = newScoreboard
     }
 

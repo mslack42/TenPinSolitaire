@@ -6,6 +6,7 @@ import ScoreBoard from './ScoreBoard.vue'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useScoreStore } from '../../stores/scoreStore'
+import { useCardsStore } from '@/client/stores/cardsStore'
 
 const scoreStore = useScoreStore()
 const { scoreboard } = storeToRefs(scoreStore)
@@ -20,9 +21,14 @@ const gameOver = computed(() => {
         scoreboard.value[9].frameRunningTotal !== null
     )
 })
+const cardStore = useCardsStore()
+const { currentSeed } = storeToRefs(cardStore)
 </script>
 
 <template>
+    <template v-if="currentSeed">
+        <div>Current Seed: {{ currentSeed }}</div>
+    </template>
     <ScoreBoard v-bind="scoreboardData"></ScoreBoard>
     <template v-if="!gameOver">
         <PinsView></PinsView>

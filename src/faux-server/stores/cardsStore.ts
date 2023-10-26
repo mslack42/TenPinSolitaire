@@ -17,10 +17,25 @@ export const useCardsStore = defineStore('serverCards', () => {
     const numberOfPinsRemaining = computed(
         () => pins.value.reduce((a, b) => a.concat(b), []).filter((p) => !p.isRemoved).length
     )
+    const _seed = ref<String | null>(null)
+    const seed = computed<String | null>(() => _seed.value)
 
     function generateAllFrameDeals() {
-        _allFrameDeals.value = dealAllFrames()
+        const seedStr = seed.value && seed.value !== '' ? seed.value : null
+        _allFrameDeals.value = dealAllFrames(seedStr)
         _nextDealIndex.value = 0
+    }
+
+    function resetShuffleSeed(newSeed?: String) {
+        if (newSeed && newSeed !== '') {
+            _seed.value = newSeed
+        } else {
+            _seed.value = null
+        }
+    }
+
+    function updateClientCardStateFromServer(){
+        updateClientCardsState(pins.value, solitaire.value, pinCoordsHitThisBall.value, seed.value)
     }
 
     function freshDeal() {
@@ -30,7 +45,7 @@ export const useCardsStore = defineStore('serverCards', () => {
         _solitaire.value = nextDeal?.solitaire!
         _pinCoordsHitThisBall.value = []
 
-        updateClientCardsState(pins.value, solitaire.value, pinCoordsHitThisBall.value)
+        updateClientCardStateFromServer()
     }
 
     function removeCards(pinsToRemove: CardCoord[], solitaireToRemove: CardCoord[]) {
@@ -44,7 +59,7 @@ export const useCardsStore = defineStore('serverCards', () => {
         })
         _pinCoordsHitThisBall.value = _pinCoordsHitThisBall.value.concat(pinsToRemove)
 
-        updateClientCardsState(pins.value, solitaire.value, pinCoordsHitThisBall.value)
+        updateClientCardStateFromServer()
     }
 
     function removeTopSolitaireCards() {
@@ -58,13 +73,13 @@ export const useCardsStore = defineStore('serverCards', () => {
         })
         _pinCoordsHitThisBall.value = []
 
-        updateClientCardsState(pins.value, solitaire.value, pinCoordsHitThisBall.value)
+        updateClientCardStateFromServer()
     }
 
     watch(
         [pins, solitaire, pinCoordsHitThisBall],
-        ([newPins, newSolitiare, newPinCoordsHitThisBall]) => {
-            updateClientCardsState(newPins, newSolitiare, newPinCoordsHitThisBall)
+        () => {
+            updateClientCardStateFromServer()
         }
     )
 
@@ -73,6 +88,8 @@ export const useCardsStore = defineStore('serverCards', () => {
         solitaire,
         pinCoordsHitThisBall,
         numberOfPinsRemaining,
+        seed,
+        resetShuffleSeed,
         freshDeal,
         generateAllFrameDeals,
         removeCards,

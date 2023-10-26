@@ -9,6 +9,7 @@ export const useCardsStore = defineStore('clientCards', () => {
     const pins = ref<UIPinRow[]>([])
     const solitaire = ref<UICardColumn[]>([])
     const pinCoordsHitThisBall = ref<CardCoord[]>([])
+    const currentSeed = ref<String|null>('')
 
     const selectedPinsCoords = computed<CardCoord[]>(() => getSelectedCardCoordinates(pins.value))
     const selectedSolitaireCoords = computed<CardCoord[]>(() =>
@@ -32,11 +33,13 @@ export const useCardsStore = defineStore('clientCards', () => {
     function refreshCardState(
         newPins: UIPinRow[],
         newSolitaire: UICardColumn[],
-        newPinCoordsHitThisBall: CardCoord[]
+        newPinCoordsHitThisBall: CardCoord[],
+        newCurrentSeed?: String|null
     ) {
         pins.value = newPins
         solitaire.value = newSolitaire
         pinCoordsHitThisBall.value = newPinCoordsHitThisBall
+        currentSeed.value = newCurrentSeed
         updateSelectability(pins.value, solitaire.value, pinCoordsHitThisBall.value)
     }
 
@@ -64,6 +67,7 @@ export const useCardsStore = defineStore('clientCards', () => {
         selectedPinsCoords,
         selectedSolitaireCoords,
         hasValidSelection,
+        currentSeed,
         refreshCardState,
         selectPin,
         selectSolitaireCard

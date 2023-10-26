@@ -14,7 +14,8 @@ function useStores() {
 export function updateClientCardsState(
     newPins: PinRow[],
     newSolitiare: CardColumn[],
-    newPinCoordsHitThisBall: CardCoord[]
+    newPinCoordsHitThisBall: CardCoord[],
+    newCurrentSeed?: String|null
 ) {
     const { cardStore } = useStores()
     // Build UI data from 'backend' data
@@ -54,7 +55,7 @@ export function updateClientCardsState(
         })
     })
     // Insert new UI data
-    cardStore.refreshCardState(newUIPins, newUISolitaire, newPinCoordsHitThisBall)
+    cardStore.refreshCardState(newUIPins, newUISolitaire, newPinCoordsHitThisBall, newCurrentSeed)
 }
 
 export function updateClientScoreState(scoreboard: FrameScore[]) {

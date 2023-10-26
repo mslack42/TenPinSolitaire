@@ -2,6 +2,8 @@ import type { Card } from '@/data/Card'
 import type { CardColumn, PinRow } from '@/data/CardCollection'
 import type { FrameDeal } from '@/data/FrameDeal'
 import { Suit } from '@/data/Suit'
+import random from 'random'
+import seedrandom from 'seedrandom'
 
 function createCard(value: number, suit: Suit): Card {
     return {
@@ -30,16 +32,24 @@ function dealSolitaire(solitaireCards: Card[]) {
     return cols
 }
 
-export function dealCards(): FrameDeal {
+function shuffleCards(cards: Card[], seed?: String) {
+    if (seed) {
+        random.use(seedrandom(seed))
+    }
+
+    return cards
+        .map((value) => ({ value, sort: random.float() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
+}
+
+export function dealCards(seed?: String): FrameDeal {
     const allCards = Array(10)
         .fill(null)
         .map((_, i) => [createCard(i + 1, Suit.Hearts), createCard(i + 1, Suit.Spades)])
         .reduce((a, b) => a.concat(b), [])
 
-    const shuffled = allCards
-        .map((value) => ({ value, sort: Math.random() }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(({ value }) => value)
+    const shuffled = shuffleCards(allCards, seed)
 
     const pinsCards = shuffled.slice(0, 10)
     const solitaireCards = shuffled.slice(10, 20)
