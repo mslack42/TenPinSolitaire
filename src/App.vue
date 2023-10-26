@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import WelcomeMenu from './client/components/menu/WelcomeMenu.vue'
-import GameView from './client/components/game/GameView.vue'
-import { useClientStore } from './client/stores/clientStore'
-import { AppModes } from './client/AppModes'
+import { useLocalStorageStore } from './faux-server/localStorageStore';
 
-const clientStore = useClientStore()
-const { appMode } = storeToRefs(clientStore)
+useLocalStorageStore().loadState()
+
 </script>
 
 <template>
-    <WelcomeMenu v-if="appMode === AppModes.Welcome"></WelcomeMenu>
-    <GameView v-if="appMode === AppModes.Game"></GameView>
+    <router-view></router-view>
 </template>
 
 <style></style>

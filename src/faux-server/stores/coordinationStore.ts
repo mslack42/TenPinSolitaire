@@ -1,3 +1,4 @@
+import type { CoordState } from '@/data/CachedState'
 import type { FrameScore } from '@/data/FrameScore'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
@@ -42,11 +43,25 @@ export const useCoordinationStore = defineStore('serverCoordination', () => {
         }
     }
 
+    function load(coordState: CoordState) {
+        _currentFrame.value = coordState._currentFrame,
+        _currentBall.value = coordState._currentBall
+    }
+
+    function exportForCache() {
+        return {
+            _currentFrame: _currentFrame.value,
+            _currentBall: _currentBall.value
+        }
+    }
+
     return {
         currentFrame,
         currentBall,
         isGameOver,
         resetCoordination,
-        goToNext
+        goToNext,
+        load,
+        exportForCache
     }
 })

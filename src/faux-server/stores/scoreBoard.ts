@@ -3,6 +3,7 @@ import type { FrameScore } from '@/data/FrameScore'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { applyRunningTotals } from './score/applyRunningTotals'
+import type { ScoreState } from '@/data/CachedState'
 
 export const useScoreboardStore = defineStore('serverScoreboard', () => {
     const _scoreboard = ref<FrameScore[]>([])
@@ -29,9 +30,23 @@ export const useScoreboardStore = defineStore('serverScoreboard', () => {
         updateClientScoreState(scoreboard.value)
     }
 
+    function load(scoreState: ScoreState) {
+        _scoreboard.value = scoreState._scoreboard
+
+        updateClientScoreState(scoreboard.value)
+    }
+
+    function exportForCache() {
+        return {
+            _scoreboard: _scoreboard.value
+        }
+    }
+
     return {
         scoreboard,
         resetScoreboard,
-        updateScoreboard
+        updateScoreboard,
+        load,
+        exportForCache
     }
 })

@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { dealAllFrames } from './cards/dealAllFrames'
 import { updateClientCardsState } from '@/client/client-interface'
+import type { CardState } from '@/data/CachedState'
 
 export const useCardsStore = defineStore('serverCards', () => {
     const _pins = ref<PinRow[]>([])
@@ -85,6 +86,24 @@ export const useCardsStore = defineStore('serverCards', () => {
         updateClientCardStateFromServer()
     })
 
+    function load(cardsState: CardState) {
+        _pins.value = cardsState._pins
+        _solitaire.value = cardsState._solitaire
+        _pinCoordsHitThisBall.value = cardsState._pinCoordsHitThisBall
+        _seed.value = cardsState._seed
+
+        updateClientCardStateFromServer()
+    }
+
+    function exportForCache() {
+        return {
+            _pins: _pins.value,
+            _solitaire: _solitaire.value,
+            _pinCoordsHitThisBall: _pinCoordsHitThisBall.value,
+            _seed: _seed.value
+        }
+    }
+
     return {
         pins,
         solitaire,
@@ -95,6 +114,8 @@ export const useCardsStore = defineStore('serverCards', () => {
         freshDeal,
         generateAllFrameDeals,
         removeCards,
-        removeTopSolitaireCards
+        removeTopSolitaireCards,
+        load,
+        exportForCache
     }
 })

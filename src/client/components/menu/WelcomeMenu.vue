@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import { useClientStore } from '@/client/stores/clientStore'
+import { useScoreStore } from '@/client/stores/scoreStore';
 import MenuButton from './MenuButton.vue'
-import { AppModes } from '@/client/AppModes'
-import { initialiseGame } from '@/faux-server/faux-server-interface'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia';
 
-const clientStore = useClientStore()
+const customSeed = ref('')
+const $router = useRouter()
 
 function handleReq(value: string) {
     switch (value) {
         case 'NewGame': {
-            clientStore.changeAppMode(AppModes.Game)
-            initialiseGame(customSeed.value)
+            if (customSeed.value && customSeed.value !== '') {
+                $router.push('/game/seeded/' + customSeed.value)
+            } else {
+                $router.push('/game/new')
+            }
+            break
+        }
+        case 'Continue': {
+            $router.push('/game/continue')
             break
         }
         default: {
@@ -20,13 +28,14 @@ function handleReq(value: string) {
     }
 }
 
-const customSeed = ref('')
+const scoreStore = useScoreStore()
+const { isGameOngoing } = storeToRefs(scoreStore)
+
 </script>
 
 <template>
     <h1>Tenpin Solitaire!!!</h1>
-    <MenuButton :enabled="false" :value="'Continue'" @clicked="handleReq">Continue</MenuButton>
-    <MenuButton :enabled="false" :value="'Restart'" @clicked="handleReq">Restart</MenuButton>
+    <MenuButton :enabled="isGameOngoing" :value="'Continue'" @clicked="handleReq">Continue</MenuButton>
     <MenuButton :enabled="true" :value="'NewGame'" @clicked="handleReq">New Game</MenuButton>
     <input v-model="customSeed" placeholder="Custom seed..." />
 </template>
