@@ -17,16 +17,16 @@ export const useCardsStore = defineStore('serverCards', () => {
     const numberOfPinsRemaining = computed(
         () => pins.value.reduce((a, b) => a.concat(b), []).filter((p) => !p.isRemoved).length
     )
-    const _seed = ref<String | null>(null)
-    const seed = computed<String | null>(() => _seed.value)
+    const _seed = ref<string | null>(null)
+    const seed = computed<string | null>(() => _seed.value)
 
     function generateAllFrameDeals() {
         const seedStr = seed.value && seed.value !== '' ? seed.value : null
-        _allFrameDeals.value = dealAllFrames(seedStr)
+        _allFrameDeals.value = dealAllFrames(seedStr ? seedStr : undefined)
         _nextDealIndex.value = 0
     }
 
-    function resetShuffleSeed(newSeed?: String) {
+    function resetShuffleSeed(newSeed?: string) {
         if (newSeed && newSeed !== '') {
             _seed.value = newSeed
         } else {
@@ -34,8 +34,13 @@ export const useCardsStore = defineStore('serverCards', () => {
         }
     }
 
-    function updateClientCardStateFromServer(){
-        updateClientCardsState(pins.value, solitaire.value, pinCoordsHitThisBall.value, seed.value)
+    function updateClientCardStateFromServer() {
+        updateClientCardsState(
+            pins.value,
+            solitaire.value,
+            pinCoordsHitThisBall.value,
+            seed.value ? (seed.value as string) : null
+        )
     }
 
     function freshDeal() {
@@ -76,12 +81,9 @@ export const useCardsStore = defineStore('serverCards', () => {
         updateClientCardStateFromServer()
     }
 
-    watch(
-        [pins, solitaire, pinCoordsHitThisBall],
-        () => {
-            updateClientCardStateFromServer()
-        }
-    )
+    watch([pins, solitaire, pinCoordsHitThisBall], () => {
+        updateClientCardStateFromServer()
+    })
 
     return {
         pins,

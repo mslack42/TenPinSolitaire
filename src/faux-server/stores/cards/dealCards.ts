@@ -2,7 +2,7 @@ import type { Card } from '@/data/Card'
 import type { CardColumn, PinRow } from '@/data/CardCollection'
 import type { FrameDeal } from '@/data/FrameDeal'
 import { Suit } from '@/data/Suit'
-import random from 'random'
+import random, { RNG } from 'random'
 import seedrandom from 'seedrandom'
 
 function createCard(value: number, suit: Suit): Card {
@@ -32,8 +32,10 @@ function dealSolitaire(solitaireCards: Card[]) {
     return cols
 }
 
-function shuffleCards(cards: Card[], seed?: String) {
+function shuffleCards(cards: Card[], seed?: string) {
     if (seed) {
+        // typecheck doesn't like this line, but this _is_ how the docs do it
+        // @ts-ignore
         random.use(seedrandom(seed))
     }
 
@@ -43,7 +45,7 @@ function shuffleCards(cards: Card[], seed?: String) {
         .map(({ value }) => value)
 }
 
-export function dealCards(seed?: String): FrameDeal {
+export function dealCards(seed?: string): FrameDeal {
     const allCards = Array(10)
         .fill(null)
         .map((_, i) => [createCard(i + 1, Suit.Hearts), createCard(i + 1, Suit.Spades)])

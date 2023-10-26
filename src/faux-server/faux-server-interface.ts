@@ -11,11 +11,10 @@ function useStores() {
     }
 }
 
-export function initialiseGame(seed?: String) {
-    console.log(seed)
+export function initialiseGame(seed?: string) {
     const { cardStore, scoreboardStore, coordinationStore } = useStores()
     // Determine all deals for the game, and deal out the first set
-    cardStore.resetShuffleSeed(seed)
+    cardStore.resetShuffleSeed(seed ?? undefined)
     cardStore.generateAllFrameDeals()
     cardStore.freshDeal()
     // Reset the scoreboard

@@ -3,7 +3,7 @@ import { useClientStore } from '@/client/stores/clientStore'
 import MenuButton from './MenuButton.vue'
 import { AppModes } from '@/client/AppModes'
 import { initialiseGame } from '@/faux-server/faux-server-interface'
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const clientStore = useClientStore()
 
@@ -21,7 +21,6 @@ function handleReq(value: string) {
 }
 
 const customSeed = ref('')
-
 </script>
 
 <template>

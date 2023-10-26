@@ -15,7 +15,7 @@ export function updateClientCardsState(
     newPins: PinRow[],
     newSolitiare: CardColumn[],
     newPinCoordsHitThisBall: CardCoord[],
-    newCurrentSeed?: String|null
+    newCurrentSeed: string | null
 ) {
     const { cardStore } = useStores()
     // Build UI data from 'backend' data
