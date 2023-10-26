@@ -26,7 +26,7 @@ export const useCardsStore = defineStore('clientCards', () => {
     const hasValidSelection = computed(
         () =>
             selectedPinsCoords.value.length > 0 &&
-            selectedPinsCoords.value.length > 0 &&
+            selectedSolitaireCoords.value.length > 0 &&
             (pinSum.value - solitaireSum.value) % 10 === 0
     )
 
@@ -61,6 +61,23 @@ export const useCardsStore = defineStore('clientCards', () => {
         updateSelectability(pins.value, solitaire.value, pinCoordsHitThisBall.value)
     }
 
+    function clearSelection() {
+        console.log(solitaire.value)
+        pins.value.forEach((pinrow) => {
+            pinrow.forEach((pin) => {
+                pin.selectOrder = undefined
+            })
+        })
+        solitaire.value.forEach((col) => {
+            col.forEach((card) => {
+                card.selectOrder = undefined
+            })
+        })
+        console.log(solitaire.value)
+
+        updateSelectability(pins.value, solitaire.value, pinCoordsHitThisBall.value)
+    }
+
     return {
         pins,
         solitaire,
@@ -70,6 +87,7 @@ export const useCardsStore = defineStore('clientCards', () => {
         currentSeed,
         refreshCardState,
         selectPin,
-        selectSolitaireCard
+        selectSolitaireCard,
+        clearSelection
     }
 })

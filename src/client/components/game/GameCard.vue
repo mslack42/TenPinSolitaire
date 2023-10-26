@@ -39,12 +39,16 @@ function handleClick() {
                     {{ value }}
                 </div>
             </div>
+            <div class="card-select-order" v-if="isSelected && shouldDisplaySelectOrder">
+                {{ selectOrder }}
+            </div>
         </div>
     </div>
 </template>
 
 <style>
 .card-wrapper {
+    position: relative;
     margin: 5px 10px;
     height: 60px;
     width: 40px;
@@ -63,6 +67,13 @@ function handleClick() {
 
 .selected .card-aura {
     box-shadow: 0px 0px 5px 5px magenta;
+}
+
+.card-select-order {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    color: magenta;
 }
 
 .card-wrapper.shrunk {

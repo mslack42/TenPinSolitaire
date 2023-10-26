@@ -21,6 +21,7 @@ function toggleSelected(pin: UICard) {
                 v-bind="pin"
                 @selected="toggleSelected(pin)"
                 @deselected="toggleSelected(pin)"
+                :should-display-select-order="true"
             >
             </GameCard>
         </div>

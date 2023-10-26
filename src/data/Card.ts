@@ -11,4 +11,5 @@ export interface UICard extends Card {
     selectOrder?: number
     isFaceUp: boolean
     isBuried: boolean
+    shouldDisplaySelectOrder?: boolean
 }

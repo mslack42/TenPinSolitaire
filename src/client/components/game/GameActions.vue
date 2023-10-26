@@ -15,6 +15,10 @@ function confirmSelection() {
     bowlSelection(selectedPinsCoords.value, selectedSolitaireCoords.value)
 }
 
+function clearSelection() {
+    cardStore.clearSelection()
+}
+
 function pass() {
     passToNextBall()
 }
@@ -23,6 +27,7 @@ function pass() {
 <template>
     <button :disabled="!hasValidSelection" @click="confirmSelection">Confirm</button>
     <button :disabled="hasPartialSelection" @click="pass">Pass</button>
+    <button :disabled="!hasPartialSelection" @click="clearSelection">Clear Selection</button>
 </template>
 
 <style></style>
