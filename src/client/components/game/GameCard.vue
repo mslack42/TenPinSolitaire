@@ -68,7 +68,7 @@ function handleClick() {
 }
 
 .card-wrapper.removed {
-    visibility: hidden;
+    display: none;
 }
 
 .selectable .card-aura {

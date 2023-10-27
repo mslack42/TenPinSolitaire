@@ -3,7 +3,7 @@ import { useScoreStore } from '@/client/stores/scoreStore'
 import ActionButton from '../common/ActionButton.vue'
 import NewGameConfigModal from './NewGameConfigModal.vue'
 import NewGameWarningModal from './NewGameWarningModal.vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useCardsStore } from '@/client/stores/cardsStore'
@@ -39,28 +39,29 @@ const scoreStore = useScoreStore()
 const { isGameOngoing, isGameFinished } = storeToRefs(scoreStore)
 const cardStore = useCardsStore()
 const { currentSeed } = storeToRefs(cardStore)
+const cannotContinueGame = computed(() => !isGameOngoing.value || isGameFinished.value)
 </script>
 
 <template>
     <div id="appBody">
         <div class="tenpin-title">
+            <img class="logo" src="@/assets/bowling.svg" />
             <h1>Tenpin Solitaire!!! <img href="../../../assets/bowling.svg" /></h1>
             <div class="title-buttons">
                 <div class="button-wrapper">
                     <ActionButton
                         action-type="NoConsequenceAction"
-                        :enabled="isGameOngoing"
+                        :disabled="cannotContinueGame"
                         @clicked="$router.push('/game/continue')"
                         >Continue</ActionButton
                     >
                 </div>
-                <template v-if="currentSeed">
+                <template v-if="!!currentSeed && !cannotContinueGame">
                     <div>Current Seed:</div>
                     <div>{{ currentSeed }}</div>
                 </template>
                 <div class="button-wrapper">
                     <ActionButton
-                        :enabled="true"
                         @clicked="openNewGameDialog"
                         :action-type="
                             isGameOngoing && !isGameFinished
@@ -73,7 +74,11 @@ const { currentSeed } = storeToRefs(cardStore)
             </div>
         </div>
     </div>
-    <NewGameConfigModal :open="openNewGameConfig" @new-game="createNewGame"></NewGameConfigModal>
+    <NewGameConfigModal
+        :open="openNewGameConfig"
+        @new-game="createNewGame"
+        @close="openNewGameConfig = false"
+    ></NewGameConfigModal>
     <NewGameWarningModal
         :open="openNewGameWarning"
         @new-game="forceCreateNewGame"
@@ -82,6 +87,9 @@ const { currentSeed } = storeToRefs(cardStore)
 </template>
 
 <style scoped>
+.logo {
+    height: 150px;
+}
 .tenpin-title {
     display: flex;
     flex-direction: column;

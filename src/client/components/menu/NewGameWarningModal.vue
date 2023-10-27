@@ -24,8 +24,6 @@ defineEmits(['close', 'newGame'])
                 @clicked="$emit('newGame')"
                 >Start</ActionButton
             >
-            <!-- <div class="action" @click="$emit('close')">Close</div>
-            <div class="action" @click="$emit('newGame')">Start</div> -->
         </template>
     </ModalDialog>
 </template>

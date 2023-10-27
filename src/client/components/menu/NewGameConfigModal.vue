@@ -6,7 +6,7 @@ import ActionButton from '../common/ActionButton.vue'
 defineProps({
     open: Boolean
 })
-defineEmits(['newGame'])
+defineEmits(['newGame', 'close'])
 
 const customSeed = ref('')
 </script>
@@ -18,9 +18,12 @@ const customSeed = ref('')
         </template>
         <template v-slot:modal-body>
             <div>Set a custom seed?:</div>
-            <input v-model="customSeed" placeholder="Custom seed..." />
+            <input maxlength="20" v-model="customSeed" placeholder="Custom seed..." />
         </template>
         <template v-slot:modal-footer>
+            <ActionButton class="modal-button" action-type="MenuAction" @clicked="$emit('close')"
+                >Cancel</ActionButton
+            >
             <ActionButton
                 class="modal-button"
                 action-type="NoConsequenceAction"
@@ -35,5 +38,6 @@ const customSeed = ref('')
 .modal-button {
     display: inline-block;
     padding: 5px 15px;
+    margin: 0px 5px;
 }
 </style>

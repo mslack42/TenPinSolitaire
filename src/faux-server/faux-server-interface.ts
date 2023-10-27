@@ -14,7 +14,7 @@ function useStores() {
 export function initialiseGame(seed?: string) {
     const { cardStore, scoreboardStore, coordinationStore } = useStores()
     // Determine all deals for the game, and deal out the first set
-    cardStore.resetShuffleSeed(seed ?? undefined)
+    cardStore.resetShuffleSeed(seed ?? Math.random().toString().slice(2, 22)) // Randomise a seed
     cardStore.generateAllFrameDeals()
     cardStore.freshDeal()
     // Reset the scoreboard

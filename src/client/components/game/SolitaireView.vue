@@ -34,6 +34,8 @@ function toggleSelected(card: UICard) {
 .solitaire-wrapper {
     display: flex;
     justify-content: center;
+    height: 120px;
+    overflow-y: visible;
 }
 
 .solitaire {
