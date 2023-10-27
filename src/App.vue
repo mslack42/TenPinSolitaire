@@ -14,10 +14,14 @@ body {
     margin: 0;
     height: 100%;
     width: 100%;
+    font-family: sans-serif;
 }
 
 #app {
     min-height: 100%;
     background-color: rgb(0, 165, 0);
+    display: flex;
+    flex-direction: column;
 }
+
 </style>

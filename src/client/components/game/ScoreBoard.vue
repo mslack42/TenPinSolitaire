@@ -28,6 +28,7 @@ function displayBallFormat(frame: FrameScore, ballIdx: number) {
 </script>
 
 <template>
+    <div class="scoreboard">
     <table>
         <tr>
             <template v-for="(_, roundIdx) in props.scoreboard" :key="roundIdx">
@@ -47,6 +48,7 @@ function displayBallFormat(frame: FrameScore, ballIdx: number) {
             </template>
         </tr>
     </table>
+</div>
 </template>
 
 <style>
@@ -63,10 +65,15 @@ table {
 tr,
 td,
 th {
-    max-width: 30px;
-    min-width: 20px;
-    height: 20px;
+    max-width: 20px;
+    min-width: 14px;
+    height: 15px;
     border: 1px solid black;
     border-collapse: collapse;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: center;
 }
 </style>

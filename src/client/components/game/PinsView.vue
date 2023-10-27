@@ -13,6 +13,7 @@ function toggleSelected(pin: UICard) {
 </script>
 
 <template>
+    <div class="tenpins-wrapper">
     <div class="tenpins">
         <div class="pinrow" v-for="(pinrow, rowindex) in pins" :key="rowindex">
             <div class="card-socket" v-for="(pin, pinindex) in pinrow" :key="pinindex">
@@ -26,11 +27,18 @@ function toggleSelected(pin: UICard) {
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <style>
+.tenpins-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .tenpins {
     width: 300px;
+
 }
 
 .pinrow {

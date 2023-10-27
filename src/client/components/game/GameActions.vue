@@ -29,6 +29,9 @@ const openDiscardsModal = ref(false)
 </script>
 
 <template>
+    <div class="action-bar-wrapper">
+
+
     <div class="action-bar">
         <ActionButton
             action-type="ConsequenceAction"
@@ -55,10 +58,17 @@ const openDiscardsModal = ref(false)
             >Back to menu</ActionButton
         >
     </div>
+</div>
     <DiscardsModal :open="openDiscardsModal" @close="openDiscardsModal = false"></DiscardsModal>
 </template>
 
 <style>
+.action-bar-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 120px;
+}
+
 .action-bar {
     position: absolute;
     bottom: 10px;

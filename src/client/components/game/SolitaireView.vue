@@ -13,6 +13,7 @@ function toggleSelected(card: UICard) {
 </script>
 
 <template>
+    <div class="solitaire-wrapper">
     <div class="solitaire">
         <div class="cardcol" v-for="(col, colIndex) in solitaire" :key="colIndex">
             <GameCard
@@ -26,9 +27,15 @@ function toggleSelected(card: UICard) {
             </GameCard>
         </div>
     </div>
+</div>
 </template>
 
 <style>
+.solitaire-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .solitaire {
     display: flex;
     justify-content: center;
