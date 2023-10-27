@@ -38,11 +38,11 @@ const classes = computed(() =>
 
 <style scoped>
 .action-button {
-    padding: 10px;
-    font-size: 1.2em;
+    padding: 8px;
+    font-size: 1em;
     display: flex;
     border-style: solid;
-    border-radius: 6px;
+    border-radius: 5px;
 }
 
 .action-button.disabled {

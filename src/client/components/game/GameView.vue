@@ -65,8 +65,8 @@ const scoreboardData = computed(() => {
     padding: 0;
     margin: 0;
     position: relative;
-    min-height: 650px;
-    max-height: 800px;
+    min-height: 630px;
+    max-height: 700px;
     max-width: 550px;
     height: 100%;
     width: 100%;
@@ -74,6 +74,6 @@ const scoreboardData = computed(() => {
     flex-direction: column;
     justify-content: center;
     align-content: space-between;
-    gap: 10px;
+    gap: 5px;
 }
 </style>

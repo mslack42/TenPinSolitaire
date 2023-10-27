@@ -34,5 +34,6 @@ defineEmits(['close', 'newGame'])
 .modal-button {
     display: inline-block;
     padding: 5px 15px;
+    margin: 0px 5px;
 }
 </style>

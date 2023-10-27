@@ -1,14 +1,9 @@
 Pretty
 Add graphics and/or better styling
 
-Get end of game working
-
 Support mobile devices in portrait or landscape
 
 Add animations
-
-Title Screen / Menu - WIP
- - put current seed on screen if continue is a valid option
 
 Rules
 
