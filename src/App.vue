@@ -19,8 +19,10 @@ body {
 
 #app {
     min-height: 100%;
+    min-width: 100%;
     background-color: rgb(0, 165, 0);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
 }
 </style>
