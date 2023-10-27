@@ -91,6 +91,7 @@ export const useCardsStore = defineStore('serverCards', () => {
         _solitaire.value = cardsState._solitaire
         _pinCoordsHitThisBall.value = cardsState._pinCoordsHitThisBall
         _seed.value = cardsState._seed
+        _allFrameDeals.value = cardsState._allFrameDeals
 
         updateClientCardStateFromServer()
     }
@@ -100,7 +101,8 @@ export const useCardsStore = defineStore('serverCards', () => {
             _pins: _pins.value,
             _solitaire: _solitaire.value,
             _pinCoordsHitThisBall: _pinCoordsHitThisBall.value,
-            _seed: _seed.value
+            _seed: _seed.value,
+            _allFrameDeals: _allFrameDeals.value
         }
     }
 

@@ -1,11 +1,13 @@
 import type { CardColumn, CardCoord, PinRow } from './CardCollection'
+import { FrameDeal } from './FrameDeal'
 import type { FrameScore } from './FrameScore'
 
 export interface CardState {
     _pins: PinRow[]
     _solitaire: CardColumn[]
     _pinCoordsHitThisBall: CardCoord[]
-    _seed: string | null
+    _seed: string | null,
+    _allFrameDeals: FrameDeal[]
 }
 
 export interface CoordState {
