@@ -27,6 +27,7 @@ const { discards } = storeToRefs(cardsStore)
                     v-bind="card"
                     :should-display-select-order="false"
                     :is-removed="false"
+                    :is-selectable="false"
                 >
                 </GameCard>
             </div>
