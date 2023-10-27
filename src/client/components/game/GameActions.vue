@@ -30,35 +30,33 @@ const openDiscardsModal = ref(false)
 
 <template>
     <div class="action-bar-wrapper">
-
-
-    <div class="action-bar">
-        <ActionButton
-            action-type="ConsequenceAction"
-            :disabled="!hasValidSelection"
-            @clicked="confirmSelection"
-            >Confirm</ActionButton
-        >
-        <ActionButton
-            action-type="ConsequenceAction"
-            :disabled="hasPartialSelection"
-            @clicked="pass"
-            >Pass</ActionButton
-        >
-        <ActionButton
-            action-type="NoConsequenceAction"
-            :disabled="hasPartialSelection"
-            @clicked="clearSelection"
-            >Clear Selection</ActionButton
-        >
-        <ActionButton action-type="NoConsequenceAction" @clicked="openDiscardsModal = true"
-            >See Discards</ActionButton
-        >
-        <ActionButton action-type="MenuAction" @clicked="$router.push('/')"
-            >Back to menu</ActionButton
-        >
+        <div class="action-bar">
+            <ActionButton
+                action-type="ConsequenceAction"
+                :disabled="!hasValidSelection"
+                @clicked="confirmSelection"
+                >Confirm</ActionButton
+            >
+            <ActionButton
+                action-type="ConsequenceAction"
+                :disabled="hasPartialSelection"
+                @clicked="pass"
+                >Pass</ActionButton
+            >
+            <ActionButton
+                action-type="NoConsequenceAction"
+                :disabled="hasPartialSelection"
+                @clicked="clearSelection"
+                >Clear Selection</ActionButton
+            >
+            <ActionButton action-type="NoConsequenceAction" @clicked="openDiscardsModal = true"
+                >See Discards</ActionButton
+            >
+            <ActionButton action-type="MenuAction" @clicked="$router.push('/')"
+                >Back to menu</ActionButton
+            >
+        </div>
     </div>
-</div>
     <DiscardsModal :open="openDiscardsModal" @close="openDiscardsModal = false"></DiscardsModal>
 </template>
 

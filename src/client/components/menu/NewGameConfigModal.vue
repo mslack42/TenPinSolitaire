@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import ModalDialog from '../common/ModalDialog.vue'
-import ActionButton from '../common/ActionButton.vue';
+import ActionButton from '../common/ActionButton.vue'
 
 defineProps({
     open: Boolean
@@ -9,7 +9,6 @@ defineProps({
 defineEmits(['newGame'])
 
 const customSeed = ref('')
-
 </script>
 
 <template>
@@ -22,7 +21,12 @@ const customSeed = ref('')
             <input v-model="customSeed" placeholder="Custom seed..." />
         </template>
         <template v-slot:modal-footer>
-            <ActionButton class='modal-button' action-type="NoConsequenceAction" @clicked="$emit('newGame',customSeed)">Start</ActionButton>
+            <ActionButton
+                class="modal-button"
+                action-type="NoConsequenceAction"
+                @clicked="$emit('newGame', customSeed)"
+                >Start</ActionButton
+            >
         </template>
     </ModalDialog>
 </template>
@@ -32,5 +36,4 @@ const customSeed = ref('')
     display: inline-block;
     padding: 5px 15px;
 }
-
 </style>

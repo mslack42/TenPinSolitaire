@@ -14,20 +14,20 @@ function toggleSelected(card: UICard) {
 
 <template>
     <div class="solitaire-wrapper">
-    <div class="solitaire">
-        <div class="cardcol" v-for="(col, colIndex) in solitaire" :key="colIndex">
-            <GameCard
-                v-for="(card, cardindex) in col"
-                :key="cardindex"
-                v-bind="card"
-                @selected="toggleSelected(card)"
-                @deselected="toggleSelected(card)"
-                :should-display-select-order="false"
-            >
-            </GameCard>
+        <div class="solitaire">
+            <div class="cardcol" v-for="(col, colIndex) in solitaire" :key="colIndex">
+                <GameCard
+                    v-for="(card, cardindex) in col"
+                    :key="cardindex"
+                    v-bind="card"
+                    @selected="toggleSelected(card)"
+                    @deselected="toggleSelected(card)"
+                    :should-display-select-order="false"
+                >
+                </GameCard>
+            </div>
         </div>
     </div>
-</div>
 </template>
 
 <style>

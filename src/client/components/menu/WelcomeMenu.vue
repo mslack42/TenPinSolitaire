@@ -24,10 +24,10 @@ function openNewGameDialog() {
 function createNewGame(seed?: string) {
     openNewGameConfig.value = false
     if (seed && seed !== '') {
-                $router.push('/game/seeded/' + seed)
-            } else {
-                $router.push('/game/new')
-            }
+        $router.push('/game/seeded/' + seed)
+    } else {
+        $router.push('/game/new')
+    }
 }
 
 function forceCreateNewGame() {
@@ -55,9 +55,9 @@ const { currentSeed } = storeToRefs(cardStore)
                     >
                 </div>
                 <template v-if="currentSeed">
-                    <div >Current Seed: </div>
+                    <div>Current Seed:</div>
                     <div>{{ currentSeed }}</div>
-                </template>                
+                </template>
                 <div class="button-wrapper">
                     <ActionButton
                         :enabled="true"
@@ -74,7 +74,11 @@ const { currentSeed } = storeToRefs(cardStore)
         </div>
     </div>
     <NewGameConfigModal :open="openNewGameConfig" @new-game="createNewGame"></NewGameConfigModal>
-    <NewGameWarningModal :open="openNewGameWarning" @new-game="forceCreateNewGame" @close="openNewGameWarning = false"></NewGameWarningModal>
+    <NewGameWarningModal
+        :open="openNewGameWarning"
+        @new-game="forceCreateNewGame"
+        @close="openNewGameWarning = false"
+    ></NewGameWarningModal>
 </template>
 
 <style scoped>

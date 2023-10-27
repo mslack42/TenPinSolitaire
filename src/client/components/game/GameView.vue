@@ -29,26 +29,26 @@ const scoreboardData = computed(() => {
 
 <template>
     <div id="appBody">
-    <ScoreBoard v-bind="scoreboardData"></ScoreBoard>
-    <template v-if="isGameOngoing && !isGameFinished">
-        <PinsView></PinsView>
-        <SolitaireView></SolitaireView>
-        <!-- <DiscardedCards></DiscardedCards> -->
-        <GameActions></GameActions>
-    </template>
-    <template v-if="isGameFinished">
-        <div class="results">
-            <h1>Game Over!</h1>
-            <h1>Final Score:</h1>
-            <h1>{{ scoreboard[9].frameRunningTotal }}</h1>
-            <div class="actions">
-                <ActionButton action-type="MenuAction" @clicked="$router.push('/')"
-                    >Back to menu</ActionButton
-                >
+        <ScoreBoard v-bind="scoreboardData"></ScoreBoard>
+        <template v-if="isGameOngoing && !isGameFinished">
+            <PinsView></PinsView>
+            <SolitaireView></SolitaireView>
+            <!-- <DiscardedCards></DiscardedCards> -->
+            <GameActions></GameActions>
+        </template>
+        <template v-if="isGameFinished">
+            <div class="results">
+                <h1>Game Over!</h1>
+                <h1>Final Score:</h1>
+                <h1>{{ scoreboard[9].frameRunningTotal }}</h1>
+                <div class="actions">
+                    <ActionButton action-type="MenuAction" @clicked="$router.push('/')"
+                        >Back to menu</ActionButton
+                    >
+                </div>
             </div>
-        </div>
-    </template>
-</div>
+        </template>
+    </div>
 </template>
 
 <style scoped>

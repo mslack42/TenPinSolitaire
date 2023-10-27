@@ -29,26 +29,26 @@ function displayBallFormat(frame: FrameScore, ballIdx: number) {
 
 <template>
     <div class="scoreboard">
-    <table>
-        <tr>
-            <template v-for="(_, roundIdx) in props.scoreboard" :key="roundIdx">
-                <th :colspan="roundIdx === 9 ? 3 : 2">{{ roundIdx + 1 }}</th>
-            </template>
-        </tr>
-        <tr>
-            <template v-for="(frame, roundIdx) in props.scoreboard" :key="roundIdx">
-                <td>{{ displayBallFormat(frame, 0) }}</td>
-                <td>{{ displayBallFormat(frame, 1) }}</td>
-                <td v-if="roundIdx == 9">{{ displayBallFormat(frame, 2) }}</td>
-            </template>
-        </tr>
-        <tr>
-            <template v-for="(frame, roundIdx) in props.scoreboard" :key="roundIdx">
-                <th :colspan="roundIdx === 9 ? 3 : 2">{{ frame.frameRunningTotal }}</th>
-            </template>
-        </tr>
-    </table>
-</div>
+        <table>
+            <tr>
+                <template v-for="(_, roundIdx) in props.scoreboard" :key="roundIdx">
+                    <th :colspan="roundIdx === 9 ? 3 : 2">{{ roundIdx + 1 }}</th>
+                </template>
+            </tr>
+            <tr>
+                <template v-for="(frame, roundIdx) in props.scoreboard" :key="roundIdx">
+                    <td>{{ displayBallFormat(frame, 0) }}</td>
+                    <td>{{ displayBallFormat(frame, 1) }}</td>
+                    <td v-if="roundIdx == 9">{{ displayBallFormat(frame, 2) }}</td>
+                </template>
+            </tr>
+            <tr>
+                <template v-for="(frame, roundIdx) in props.scoreboard" :key="roundIdx">
+                    <th :colspan="roundIdx === 9 ? 3 : 2">{{ frame.frameRunningTotal }}</th>
+                </template>
+            </tr>
+        </table>
+    </div>
 </template>
 
 <style>
