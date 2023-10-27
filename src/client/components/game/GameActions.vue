@@ -45,7 +45,7 @@ const openDiscardsModal = ref(false)
             >
             <ActionButton
                 action-type="NoConsequenceAction"
-                :disabled="hasPartialSelection"
+                :disabled="!hasPartialSelection"
                 @clicked="clearSelection"
                 >Clear Selection</ActionButton
             >

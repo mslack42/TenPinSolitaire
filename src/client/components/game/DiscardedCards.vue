@@ -20,6 +20,7 @@ const openDiscardsModal = ref(false)
                 v-bind="card"
                 :should-display-select-order="false"
                 :is-removed="false"
+                :select-order="undefined"
                 :is-decked="cardindex !== discards.length - 1"
             >
             </GameCard>
