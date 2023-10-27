@@ -3,6 +3,7 @@ import ModalDialog from '../common/ModalDialog.vue'
 import { useCardsStore } from '../../stores/cardsStore'
 import { storeToRefs } from 'pinia'
 import GameCard from './GameCard.vue'
+import ActionButton from '../common/ActionButton.vue'
 
 defineProps({
     open: Boolean
@@ -16,7 +17,7 @@ const { discards } = storeToRefs(cardsStore)
 <template>
     <ModalDialog :isOpen="open">
         <template v-slot:modal-header>
-            <h1>Discards</h1>
+            <h1>All Discards:</h1>
         </template>
         <template v-slot:modal-body>
             <div class="card-spread">
@@ -31,7 +32,12 @@ const { discards } = storeToRefs(cardsStore)
             </div>
         </template>
         <template v-slot:modal-footer>
-            <div class="action" @click="$emit('close')">Close</div>
+            <ActionButton
+                class="modal-button"
+                action-type="NoConsequenceAction"
+                @clicked="$emit('close')"
+                >Close</ActionButton
+            >
         </template>
     </ModalDialog>
 </template>
@@ -40,6 +46,11 @@ const { discards } = storeToRefs(cardsStore)
 .action {
     display: inline-block;
     padding: 5px;
+}
+
+.modal-button {
+    display: inline-block;
+    padding: 5px 15px;
 }
 
 .card-spread {
