@@ -8,4 +8,16 @@ useLocalStorageStore().loadState()
     <router-view></router-view>
 </template>
 
-<style></style>
+<style>
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#app {
+    min-height: 100%;
+    background-color: rgb(0, 165, 0);
+}
+</style>

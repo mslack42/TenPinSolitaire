@@ -15,15 +15,15 @@ function toggleSelected(pin: UICard) {
 <template>
     <div class="tenpins">
         <div class="pinrow" v-for="(pinrow, rowindex) in pins" :key="rowindex">
-            <GameCard
-                v-for="(pin, pinindex) in pinrow"
-                :key="pinindex"
-                v-bind="pin"
-                @selected="toggleSelected(pin)"
-                @deselected="toggleSelected(pin)"
-                :should-display-select-order="true"
-            >
-            </GameCard>
+            <div class="card-socket" v-for="(pin, pinindex) in pinrow" :key="pinindex">
+                <GameCard
+                    v-bind="pin"
+                    @selected="toggleSelected(pin)"
+                    @deselected="toggleSelected(pin)"
+                    :should-display-select-order="true"
+                >
+                </GameCard>
+            </div>
         </div>
     </div>
 </template>
@@ -36,5 +36,15 @@ function toggleSelected(pin: UICard) {
 .pinrow {
     display: flex;
     justify-content: center;
+}
+
+.card-socket {
+    display: flex;
+    justify-content: center;
+    border-radius: 2px;
+    margin: 2px;
+    border-color: gray;
+    border-style: solid;
+    padding: -10px;
 }
 </style>

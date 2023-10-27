@@ -7,7 +7,6 @@ import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { onBeforeRouteUpdate } from 'vue-router'
 import { useScoreStore } from '../../stores/scoreStore'
-import { useCardsStore } from '@/client/stores/cardsStore'
 import { initialiseGame } from '@/faux-server/faux-server-interface'
 
 onBeforeRouteUpdate((to) => {
@@ -25,21 +24,14 @@ const scoreboardData = computed(() => {
         scoreboard: scoreboard.value
     }
 })
-const cardStore = useCardsStore()
-const { currentSeed } = storeToRefs(cardStore)
 </script>
 
 <template>
-    <RouterLink to="/">Back to menu...<br /></RouterLink>
-    <template v-if="currentSeed">
-        <div>Current Seed: {{ currentSeed }}</div>
-    </template>
     <ScoreBoard v-bind="scoreboardData"></ScoreBoard>
     <template v-if="isGameOngoing">
-        <div class="baize">
-            <PinsView></PinsView>
-            <SolitaireView></SolitaireView>
-        </div>
+        <PinsView></PinsView>
+        <SolitaireView></SolitaireView>
+        <!-- <DiscardedCards></DiscardedCards> -->
         <GameActions></GameActions>
     </template>
     <template v-else>
@@ -47,9 +39,4 @@ const { currentSeed } = storeToRefs(cardStore)
     >
 </template>
 
-<style>
-.baize {
-    background-color: rgb(0, 165, 0);
-    height: 500px;
-}
-</style>
+<style></style>

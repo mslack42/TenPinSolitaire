@@ -57,14 +57,15 @@ table {
     border-right: 1px solid black;
     border-collapse: collapse;
     display: inline-block;
+    background-color: white;
 }
 
 tr,
 td,
 th {
-    max-width: 20px;
-    min-width: 15px;
-    height: 15px;
+    max-width: 30px;
+    min-width: 20px;
+    height: 20px;
     border: 1px solid black;
     border-collapse: collapse;
 }

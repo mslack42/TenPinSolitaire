@@ -10,6 +10,7 @@ export interface UICard extends Card {
     isSelectable?: boolean
     selectOrder?: number
     isFaceUp: boolean
-    isBuried: boolean
+    isBuried?: boolean
+    isDecked?: boolean
     shouldDisplaySelectOrder?: boolean
 }

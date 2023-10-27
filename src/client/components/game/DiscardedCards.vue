@@ -2,34 +2,34 @@
 import { useCardsStore } from '../../stores/cardsStore'
 import { storeToRefs } from 'pinia'
 import GameCard from './GameCard.vue'
-import type { UICard } from '../../../data/Card'
+import DiscardsModal from './DiscardsModal.vue'
+import { ref } from 'vue'
 
-const solitaireStore = useCardsStore()
-const { solitaire } = storeToRefs(solitaireStore)
+const cardsStore = useCardsStore()
+const { discards } = storeToRefs(cardsStore)
 
-function toggleSelected(card: UICard) {
-    solitaireStore.selectSolitaireCard(card)
-}
+const openDiscardsModal = ref(false)
 </script>
 
 <template>
-    <div class="solitaire">
-        <div class="cardcol" v-for="(col, colIndex) in solitaire" :key="colIndex">
+    <div class="discards">
+        <div class="cardcol" @click="openDiscardsModal = true">
             <GameCard
-                v-for="(card, cardindex) in col"
+                v-for="(card, cardindex) in discards"
                 :key="cardindex"
                 v-bind="card"
-                @selected="toggleSelected(card)"
-                @deselected="toggleSelected(card)"
                 :should-display-select-order="false"
+                :is-removed="false"
+                :is-decked="cardindex !== discards.length - 1"
             >
             </GameCard>
         </div>
     </div>
+    <DiscardsModal :open="openDiscardsModal" @close="openDiscardsModal = false"></DiscardsModal>
 </template>
 
 <style>
-.solitaire {
+.discards {
     display: flex;
     justify-content: center;
     width: 300px;

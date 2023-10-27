@@ -14,7 +14,8 @@ const classes = computed(() =>
         isSelected.value ? 'selected ' : '',
         props?.isSelectable ? 'selectable ' : '',
         props.isRemoved ? 'removed ' : '',
-        props?.isBuried ? 'buried ' : ''
+        props?.isBuried ? 'buried ' : '',
+        props?.isDecked ? 'decked ' : ''
     ]
         .join('')
         .trim()
@@ -59,7 +60,6 @@ function handleClick() {
 <style>
 .card-wrapper {
     position: relative;
-    margin: 5px 10px;
     height: 60px;
     width: 40px;
     border-color: black;
@@ -113,8 +113,12 @@ function handleClick() {
 
 .card-wrapper.buried {
     overflow-y: visible;
-    margin: 1px 10px;
     margin-bottom: -50px;
+}
+
+.card-wrapper.decked {
+    overflow-y: visible;
+    margin-bottom: -60px;
 }
 
 .card-wrapper.facedown {
