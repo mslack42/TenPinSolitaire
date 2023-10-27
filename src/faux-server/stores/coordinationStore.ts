@@ -51,7 +51,8 @@ export const useCoordinationStore = defineStore('serverCoordination', () => {
     function exportForCache() {
         return {
             _currentFrame: _currentFrame.value,
-            _currentBall: _currentBall.value
+            _currentBall: _currentBall.value,
+            isGameOver: isGameOver.value
         }
     }
 

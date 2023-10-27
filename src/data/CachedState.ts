@@ -8,11 +8,13 @@ export interface CardState {
     _pinCoordsHitThisBall: CardCoord[]
     _seed: string | null
     _allFrameDeals: FrameDeal[]
+    _nextDealIndex: number
 }
 
 export interface CoordState {
     _currentFrame: number
     _currentBall: number
+    isGameOver: boolean
 }
 
 export interface ScoreState {
