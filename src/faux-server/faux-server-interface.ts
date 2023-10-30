@@ -54,7 +54,11 @@ export function passToNextBall() {
     coordinationStore.goToNext(scoreboardStore.scoreboard)
     const nextFrame = coordinationStore.currentFrame
 
-    if (nextFrame !== startingFrame || cardStore.numberOfPinsRemaining === 0) {
+    if (nextFrame === 11) {
+        // Game over
+        // Do nothing - game over state will be sent to client
+    }
+    else if (nextFrame !== startingFrame || cardStore.numberOfPinsRemaining === 0) {
         cardStore.freshDeal()
     } else {
         // Remove top solitaire cards
