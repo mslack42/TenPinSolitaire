@@ -14,7 +14,7 @@ function displayBallFormat(frame: FrameScore, ballIdx: number) {
     if (ballScore === null) {
         return ' '
     }
-    if (ballScore === 10) {
+    if (previousBallScoreInRound === null && ballScore === 10) {
         return 'X'
     }
     if (previousBallScoreInRound !== null && ballScore + previousBallScoreInRound === 10) {

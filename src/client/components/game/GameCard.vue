@@ -27,6 +27,14 @@ function handleClick() {
     const event = isSelected.value ? 'deselected' : 'selected'
     emit(event)
 }
+
+function displayCardValue(value: number) {
+    if (value === 1) {
+        return 'A'
+    } else {
+        return String(value)
+    }
+}
 </script>
 
 <template>
@@ -40,7 +48,7 @@ function handleClick() {
                 <div class="card-contents">
                     <div class="suit upper" :class="suitClass"></div>
                     <div class="card-value">
-                        {{ value }}
+                        {{ displayCardValue(value) }}
                     </div>
                     <div class="suit lower" :class="suitClass"></div>
                 </div>
