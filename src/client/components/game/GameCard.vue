@@ -73,6 +73,7 @@ function displayCardValue(value: number) {
     border-color: black;
     border: 2px;
     border-style: solid;
+    cursor: default;
 }
 
 .card-wrapper.removed {

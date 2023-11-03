@@ -44,6 +44,7 @@ const classes = computed(() =>
     border-style: solid;
     border-radius: 5px;
     box-shadow: 2px 2px 1px 1px rgba(58, 56, 56, 0.521);
+    cursor: default;
 }
 
 .action-button.disabled {
