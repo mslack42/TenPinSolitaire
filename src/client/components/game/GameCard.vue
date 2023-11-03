@@ -81,6 +81,7 @@ function displayCardValue(value: number) {
 
 .selectable .card-aura {
     box-shadow: 0px 0px 5px 5px cyan;
+    cursor: pointer;
 }
 
 .selected .card-aura {

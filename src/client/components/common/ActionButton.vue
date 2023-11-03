@@ -43,33 +43,33 @@ const classes = computed(() =>
     display: flex;
     border-style: solid;
     border-radius: 5px;
+    box-shadow: 2px 2px 1px 1px rgba(58, 56, 56, 0.521);
 }
 
 .action-button.disabled {
     background-color: gray;
     border-color: rgba(58, 56, 56, 0.521);
-    box-shadow: 2px 2px 1px 1px rgba(58, 56, 56, 0.521);
     opacity: 50%;
+}
+
+.action-button.enabled {
+    color: white;
+    cursor: pointer;
 }
 
 .action-button.enabled.red-action {
     background-color: rgb(253, 120, 120);
     border-color: rgb(253, 93, 93);
-    color: white;
-    box-shadow: 2px 2px 1px 1px rgba(58, 56, 56, 0.521);
+
 }
 
 .action-button.enabled.blue-action {
     background-color: rgb(99, 99, 250);
     border-color: rgb(78, 78, 253);
-    color: white;
-    box-shadow: 2px 2px 1px 1px rgba(58, 56, 56, 0.521);
 }
 
 .action-button.enabled.purple-action {
     background-color: rgb(143, 88, 143);
     border-color: rgb(145, 76, 145);
-    color: white;
-    box-shadow: 2px 2px 1px 1px rgba(58, 56, 56, 0.521);
 }
 </style>
