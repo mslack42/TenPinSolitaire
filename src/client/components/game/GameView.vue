@@ -9,6 +9,7 @@ import { onBeforeRouteUpdate } from 'vue-router'
 import { useScoreStore } from '../../stores/scoreStore'
 import { initialiseGame } from '@/faux-server/faux-server-interface'
 import ActionButton from '../common/ActionButton.vue'
+import { useCardsStore } from '@/client/stores/cardsStore'
 
 onBeforeRouteUpdate((to) => {
     if (to.params['seed']) {
@@ -25,6 +26,13 @@ const scoreboardData = computed(() => {
         scoreboard: scoreboard.value
     }
 })
+
+const cardStore = useCardsStore()
+const { currentSeed } = storeToRefs(cardStore)
+
+function copySeed() {
+    navigator.clipboard.writeText(currentSeed.value!)
+}
 </script>
 
 <template>
@@ -46,12 +54,32 @@ const scoreboardData = computed(() => {
                         >Back to menu</ActionButton
                     >
                 </div>
+                <div>
+                    <p>You can play the same game again using the seed:</p>
+                    <div class="seed-line">
+                        <p>{{ currentSeed }}</p>
+                        <img class="copy" src="@/assets/copy.svg" @click="copySeed" />
+                    </div>
+                </div>
             </div>
         </template>
     </div>
 </template>
 
 <style scoped>
+.seed-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.copy {
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
 .results {
     text-align: center;
 }

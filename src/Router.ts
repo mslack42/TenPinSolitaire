@@ -1,4 +1,5 @@
 import GameView from './client/components/game/GameView.vue'
+import RulesView from './client/components/rules/RulesView.vue'
 import WelcomeMenu from './client/components/menu/WelcomeMenu.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteLocationNormalized } from 'vue-router'
@@ -36,6 +37,11 @@ const routes = [
         name: 'continueGame',
         path: '/game/continue',
         component: GameView
+    },
+    {
+        name: 'rules',
+        path: '/rules',
+        component: RulesView
     }
 ]
 

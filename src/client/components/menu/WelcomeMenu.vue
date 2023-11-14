@@ -40,14 +40,25 @@ const { isGameOngoing, isGameFinished } = storeToRefs(scoreStore)
 const cardStore = useCardsStore()
 const { currentSeed } = storeToRefs(cardStore)
 const cannotContinueGame = computed(() => !isGameOngoing.value || isGameFinished.value)
+
+function copySeed() {
+    navigator.clipboard.writeText(currentSeed.value!)
+}
 </script>
 
 <template>
     <div id="appBody">
         <div class="tenpin-title">
             <img class="logo" src="@/assets/bowling.svg" />
-            <h1>Tenpin Solitaire!!! <img href="../../../assets/bowling.svg" /></h1>
+            <h1>Tenpin Solitaire!!!</h1>
             <div class="title-buttons">
+                <div class="button-wrapper">
+                    <ActionButton
+                        @clicked="$router.push('/rules')"
+                        action-type="NoConsequenceAction"
+                        >Rules</ActionButton
+                    >
+                </div>
                 <div class="button-wrapper">
                     <ActionButton
                         action-type="NoConsequenceAction"
@@ -58,7 +69,10 @@ const cannotContinueGame = computed(() => !isGameOngoing.value || isGameFinished
                 </div>
                 <template v-if="!!currentSeed && !cannotContinueGame">
                     <div>Current Seed:</div>
-                    <div>{{ currentSeed }}</div>
+                    <div class="seed-line">
+                        <div>{{ currentSeed }}</div>
+                        <img class="copy" src="@/assets/copy.svg" @click="copySeed" />
+                    </div>
                 </template>
                 <div class="button-wrapper">
                     <ActionButton
@@ -87,6 +101,18 @@ const cannotContinueGame = computed(() => !isGameOngoing.value || isGameFinished
 </template>
 
 <style scoped>
+.seed-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.copy {
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
 .logo {
     height: 150px;
 }

@@ -61,7 +61,6 @@ const classes = computed(() =>
 .action-button.enabled.red-action {
     background-color: rgb(253, 120, 120);
     border-color: rgb(253, 93, 93);
-
 }
 
 .action-button.enabled.blue-action {
